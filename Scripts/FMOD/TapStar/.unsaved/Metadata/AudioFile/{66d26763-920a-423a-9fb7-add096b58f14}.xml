@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{66d26763-920a-423a-9fb7-add096b58f14}">
+		<property name="assetPath">
+			<value>disco-train.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>132.54530612244898</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{69c98dd5-930f-435a-8cb0-39be2425d45d}</destination>
+		</relationship>
+	</object>
+</objects>

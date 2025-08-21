@@ -1,51 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8488498285576519799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: /Users/deathcry/Work/RockStarter/FMOD/TapStar/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638913490853021172
-  FileSizes:
-  - Name: Desktop
-    Value: 3433856
-  Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
-  EditorBanks:
-  - {fileID: 7809824937397180934}
-  - {fileID: -8488498285576519799}
-  EditorEvents:
-  - {fileID: 3726626642156907907}
-  - {fileID: 933062412577461349}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -8488498285576519799}
-  StringsBanks:
-  - {fileID: 7809824937397180934}
-  cacheTime: 638913490853046720
-  cacheVersion: 131632
---- !u!114 &933062412577461349
+--- !u!114 &-5407185920027329360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +19,7 @@ MonoBehaviour:
     Data3: 1107112866
     Data4: 669534563
   Banks:
-  - {fileID: -8488498285576519799}
+  - {fileID: -457943546660542828}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -72,7 +27,77 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 117185
---- !u!114 &3726626642156907907
+--- !u!114 &-457943546660542828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638914346251064307
+  FileSizes:
+  - Name: Desktop
+    Value: 3434016
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
+  EditorBanks:
+  - {fileID: 1231034005150947442}
+  - {fileID: -457943546660542828}
+  EditorEvents:
+  - {fileID: -5407185920027329360}
+  - {fileID: 4653328222235567238}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -457943546660542828}
+  StringsBanks:
+  - {fileID: 1231034005150947442}
+  cacheVersion: 131848
+  cacheTime: 638914346251071180
+  SerializableEventsDict:
+  - key: event:/GetYoHandsUp
+    index: 0
+  - key: event:/DiscoTrain
+    index: 1
+--- !u!114 &1231034005150947442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638914346251071180
+  FileSizes:
+  - Name: Desktop
+    Value: 826
+  Exists: 1
+--- !u!114 &4653328222235567238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +116,7 @@ MonoBehaviour:
     Data3: -1720283987
     Data4: -1531436382
   Banks:
-  - {fileID: -8488498285576519799}
+  - {fileID: -457943546660542828}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -99,23 +124,3 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 132545
---- !u!114 &7809824937397180934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: /Users/deathcry/Work/RockStarter/FMOD/TapStar/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638913490853046720
-  FileSizes:
-  - Name: Desktop
-    Value: 814
-  Exists: 1
