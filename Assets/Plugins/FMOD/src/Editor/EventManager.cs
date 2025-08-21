@@ -51,7 +51,6 @@ namespace FMODUnity
             eventCache.CacheTime = DateTime.MinValue;
             eventCache.EditorBanks.Clear();
             eventCache.EditorEvents.Clear();
-            eventCache.EditorEventsDict.Clear();
             eventCache.EditorParameters.Clear();
             eventCache.StringsBanks.Clear();
             eventCache.MasterBanks.Clear();
@@ -357,7 +356,6 @@ namespace FMODUnity
                 });
                 eventCache.EditorParameters.RemoveAll((x) => x == null);
 
-                eventCache.BuildDictionary();
                 AssetDatabase.SaveAssets();
             }
             finally
@@ -658,7 +656,7 @@ namespace FMODUnity
 #pragma warning restore 0618
                 {
                     RuntimeUtils.DebugLogWarningFormat("FMOD: A component of type {0} in scene '{1}' on GameObject '{2}' has an "
-                        + "obsolete [EventRef] attribute on field {3}. {4}",
+                        + "obsolete [FMODUnity.EventRef] attribute on field {3}. {4}",
                         type.Name, scene.name, EditorUtils.GameObjectPath(behaviour), field.Name,
                         UpdaterInstructions);
                 }
@@ -1226,13 +1224,7 @@ namespace FMODUnity
         public static EditorEventRef EventFromString(string path)
         {
             AffirmEventCache();
-
-            if (eventCache.EditorEventsDict.TryGetValue(path, out int index))
-            {
-                return eventCache.EditorEvents[index];
-            }
-
-            return null;
+            return eventCache.EditorEvents.Find((x) => x.Path.Equals(path, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public static EditorEventRef EventFromGUID(FMOD.GUID guid)
