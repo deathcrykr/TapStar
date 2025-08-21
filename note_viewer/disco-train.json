@@ -1,0 +1,747 @@
+{
+  "metadata": {
+    "title": "Generated Rhythm Chart",
+    "description": "박자 기반 노트 + 보컬 외침 감지",
+    "generator": "RhythmGameNoteGenerator v1.0",
+    "audio_file": "disco-train.mp3"
+  },
+  "timing": {
+    "bpm": 126.04801829268293,
+    "sample_rate": 44100,
+    "beat_interval_ms": 476
+  },
+  "notes": [
+    {
+      "time_seconds": 0.046,
+      "time_milliseconds": 46,
+      "time_samples": 2048,
+      "lane": 1,
+      "type": "hold",
+      "intensity": 1.0,
+      "beat_position": 1,
+      "source": "rhythm",
+      "duration_seconds": 0.5,
+      "duration_milliseconds": 500,
+      "duration_samples": 22050
+    },
+    {
+      "time_seconds": 3.796,
+      "time_milliseconds": 3796,
+      "time_samples": 167424,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.71,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 7.651,
+      "time_milliseconds": 7651,
+      "time_samples": 337408,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 11.471,
+      "time_milliseconds": 11471,
+      "time_samples": 505856,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.65,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 13.386,
+      "time_milliseconds": 13386,
+      "time_samples": 590336,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.73,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 14.582,
+      "time_milliseconds": 14582,
+      "time_samples": 643072,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.91,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 18.274,
+      "time_milliseconds": 18274,
+      "time_samples": 805888,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.7,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 21.653,
+      "time_milliseconds": 21653,
+      "time_samples": 954880,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.22,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 23.568,
+      "time_milliseconds": 23568,
+      "time_samples": 1039360,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 24.532,
+      "time_milliseconds": 24532,
+      "time_samples": 1081856,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.21,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 26.448,
+      "time_milliseconds": 26448,
+      "time_samples": 1166336,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.22,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 27.388,
+      "time_milliseconds": 27388,
+      "time_samples": 1207808,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 28.851,
+      "time_milliseconds": 28851,
+      "time_samples": 1272320,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.22,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 30.29,
+      "time_milliseconds": 30290,
+      "time_samples": 1335808,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 30.766,
+      "time_milliseconds": 30766,
+      "time_samples": 1356800,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 33.146,
+      "time_milliseconds": 33146,
+      "time_samples": 1461760,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.75,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 34.133,
+      "time_milliseconds": 34133,
+      "time_samples": 1505280,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 34.609,
+      "time_milliseconds": 34609,
+      "time_samples": 1526272,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 35.573,
+      "time_milliseconds": 35573,
+      "time_samples": 1568768,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.2,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 36.037,
+      "time_milliseconds": 36037,
+      "time_samples": 1589248,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.67,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 37.013,
+      "time_milliseconds": 37013,
+      "time_samples": 1632256,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 38.452,
+      "time_milliseconds": 38452,
+      "time_samples": 1695744,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.21,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 38.928,
+      "time_milliseconds": 38928,
+      "time_samples": 1716736,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 39.892,
+      "time_milliseconds": 39892,
+      "time_samples": 1759232,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.22,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 40.623,
+      "time_milliseconds": 40623,
+      "time_samples": 1791488,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.76,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 41.761,
+      "time_milliseconds": 41761,
+      "time_samples": 1841664,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.79,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 43.236,
+      "time_milliseconds": 43236,
+      "time_samples": 1906688,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.78,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 44.211,
+      "time_milliseconds": 44211,
+      "time_samples": 1949696,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 44.687,
+      "time_milliseconds": 44687,
+      "time_samples": 1970688,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.71,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 45.163,
+      "time_milliseconds": 45163,
+      "time_samples": 1991680,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.83,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 46.126,
+      "time_milliseconds": 46126,
+      "time_samples": 2034176,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 58.108,
+      "time_milliseconds": 58108,
+      "time_samples": 2562560,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.7,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 61.486,
+      "time_milliseconds": 61486,
+      "time_samples": 2711552,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.32,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 61.835,
+      "time_milliseconds": 61835,
+      "time_samples": 2726912,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.86,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 65.329,
+      "time_milliseconds": 65329,
+      "time_samples": 2881024,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 71.088,
+      "time_milliseconds": 71088,
+      "time_samples": 3134976,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 72.516,
+      "time_milliseconds": 72516,
+      "time_samples": 3197952,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.68,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 74.931,
+      "time_milliseconds": 74931,
+      "time_samples": 3304448,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 79.714,
+      "time_milliseconds": 79714,
+      "time_samples": 3515392,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.67,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 88.828,
+      "time_milliseconds": 88828,
+      "time_samples": 3917312,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.67,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 91.73,
+      "time_milliseconds": 91730,
+      "time_samples": 4045312,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 92.206,
+      "time_milliseconds": 92206,
+      "time_samples": 4066304,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 101.808,
+      "time_milliseconds": 101808,
+      "time_samples": 4489728,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 103.724,
+      "time_milliseconds": 103724,
+      "time_samples": 4574208,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.37,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 104.211,
+      "time_milliseconds": 104211,
+      "time_samples": 4595712,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 105.651,
+      "time_milliseconds": 105651,
+      "time_samples": 4659200,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 106.127,
+      "time_milliseconds": 106127,
+      "time_samples": 4680192,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 107.09,
+      "time_milliseconds": 107090,
+      "time_samples": 4722688,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 107.566,
+      "time_milliseconds": 107566,
+      "time_samples": 4743680,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 108.054,
+      "time_milliseconds": 108054,
+      "time_samples": 4765184,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 108.53,
+      "time_milliseconds": 108530,
+      "time_samples": 4786176,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 113.313,
+      "time_milliseconds": 113313,
+      "time_samples": 4997120,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 120.279,
+      "time_milliseconds": 120279,
+      "time_samples": 5304320,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.66,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 121.475,
+      "time_milliseconds": 121475,
+      "time_samples": 5357056,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.68,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 124.366,
+      "time_milliseconds": 124366,
+      "time_samples": 5484544,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.42,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 124.854,
+      "time_milliseconds": 124854,
+      "time_samples": 5506048,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 125.33,
+      "time_milliseconds": 125330,
+      "time_samples": 5527040,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.39,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 125.806,
+      "time_milliseconds": 125806,
+      "time_samples": 5548032,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.4,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 126.293,
+      "time_milliseconds": 126293,
+      "time_samples": 5569536,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.32,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 126.769,
+      "time_milliseconds": 126769,
+      "time_samples": 5590528,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 1,
+      "source": "rhythm"
+    }
+  ],
+  "stats": {
+    "rhythm_notes": 39,
+    "vocal_shout_notes": 21,
+    "total_notes": 60
+  },
+  "vocal_sections": [
+    {
+      "start_time": 0,
+      "end_time": 10,
+      "section_name": "intro_inst",
+      "vocal_type": "instrumental",
+      "note_count": 3,
+      "note_density": 0.3,
+      "avg_intensity": 0.8,
+      "rhythm_notes": 1,
+      "vocal_shouts": 2
+    },
+    {
+      "start_time": 10,
+      "end_time": 20,
+      "section_name": "verse1",
+      "vocal_type": "sub_vocal",
+      "note_count": 4,
+      "note_density": 0.4,
+      "avg_intensity": 0.75,
+      "rhythm_notes": 0,
+      "vocal_shouts": 4
+    },
+    {
+      "start_time": 20,
+      "end_time": 30,
+      "section_name": "pre_chorus_inst",
+      "vocal_type": "instrumental",
+      "note_count": 6,
+      "note_density": 0.6,
+      "avg_intensity": 0.3,
+      "rhythm_notes": 5,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 30,
+      "end_time": 40,
+      "section_name": "chorus",
+      "vocal_type": "sub_vocal",
+      "note_count": 11,
+      "note_density": 1.1,
+      "avg_intensity": 0.34,
+      "rhythm_notes": 9,
+      "vocal_shouts": 2
+    },
+    {
+      "start_time": 40,
+      "end_time": 50,
+      "section_name": "verse2",
+      "vocal_type": "sub_vocal",
+      "note_count": 7,
+      "note_density": 0.7,
+      "avg_intensity": 0.63,
+      "rhythm_notes": 3,
+      "vocal_shouts": 4
+    },
+    {
+      "start_time": 50,
+      "end_time": 60,
+      "section_name": "chorus2_inst",
+      "vocal_type": "instrumental",
+      "note_count": 1,
+      "note_density": 0.1,
+      "avg_intensity": 0.7,
+      "rhythm_notes": 0,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 60,
+      "end_time": 70,
+      "section_name": "bridge_inst",
+      "vocal_type": "instrumental",
+      "note_count": 3,
+      "note_density": 0.3,
+      "avg_intensity": 0.49,
+      "rhythm_notes": 2,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 70,
+      "end_time": 80,
+      "section_name": "outro",
+      "vocal_type": "sub_vocal",
+      "note_count": 4,
+      "note_density": 0.4,
+      "avg_intensity": 0.46,
+      "rhythm_notes": 2,
+      "vocal_shouts": 2
+    },
+    {
+      "start_time": 80,
+      "end_time": 90,
+      "section_name": "instrumental_inst",
+      "vocal_type": "instrumental",
+      "note_count": 1,
+      "note_density": 0.1,
+      "avg_intensity": 0.67,
+      "rhythm_notes": 0,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 90,
+      "end_time": 100,
+      "section_name": "section_10_inst",
+      "vocal_type": "instrumental",
+      "note_count": 2,
+      "note_density": 0.2,
+      "avg_intensity": 0.37,
+      "rhythm_notes": 2,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 100,
+      "end_time": 110,
+      "section_name": "section_11",
+      "vocal_type": "main_vocal",
+      "note_count": 9,
+      "note_density": 0.9,
+      "avg_intensity": 0.32,
+      "rhythm_notes": 9,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 110,
+      "end_time": 120,
+      "section_name": "section_12_inst",
+      "vocal_type": "instrumental",
+      "note_count": 1,
+      "note_density": 0.1,
+      "avg_intensity": 0.69,
+      "rhythm_notes": 0,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 120,
+      "end_time": 126.8,
+      "section_name": "section_13",
+      "vocal_type": "sub_vocal",
+      "note_count": 7,
+      "note_density": 1.03,
+      "avg_intensity": 0.45,
+      "rhythm_notes": 5,
+      "vocal_shouts": 2
+    }
+  ]
+}

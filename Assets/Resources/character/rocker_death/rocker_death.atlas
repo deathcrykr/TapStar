@@ -1,0 +1,156 @@
+
+rocker_death.png
+size: 4017,4017
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L09_L_arm/L09_L_arm_001
+  rotate: false
+  xy: 2, 1448
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L10_rh/L10_rh_001
+  rotate: true
+  xy: 2, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L11_guitar/L11_guitar_001
+  rotate: true
+  xy: 1448, 2571
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L12_head/L12_head_001
+  rotate: false
+  xy: 2571, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+
+rocker_death2.png
+size: 4017,4017
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L13_upper body/L13_upper body_001
+  rotate: false
+  xy: 2, 1448
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L14_Leg/L14_Leg_001
+  rotate: true
+  xy: 2, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L15_R_arm/L15_R_arm_001
+  rotate: true
+  xy: 1448, 2571
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L16_L_foot/L16_L_foot_001
+  rotate: false
+  xy: 2571, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+
+rocker_death3.png
+size: 4017,4017
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L17_R_foot/L17_R_foot_001
+  rotate: false
+  xy: 2, 1448
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L19_hand/ppp00000
+  rotate: true
+  xy: 2, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L19_hand/ppp00001
+  rotate: true
+  xy: 1448, 2571
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L19_hand/ppp00002
+  rotate: false
+  xy: 2571, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+
+rocker_death4.png
+size: 4017,4017
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L19_hand/ppp00003
+  rotate: false
+  xy: 2, 1448
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L20_mouth/mouth00000
+  rotate: true
+  xy: 2, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L20_mouth/mouth00001
+  rotate: true
+  xy: 1448, 2571
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L21_eyes/ppp00000
+  rotate: false
+  xy: 2571, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+
+rocker_death5.png
+size: 2894,2571
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L21_eyes/ppp00001
+  rotate: false
+  xy: 2, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1
+L21_eyes/ppp00002
+  rotate: false
+  xy: 1448, 2
+  size: 1444, 2567
+  orig: 1444, 2567
+  offset: 0, 0
+  index: -1

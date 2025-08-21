@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 RockStarter Note Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        .info-panel {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            justify-content: center;
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #speedSlider {
+            width: 150px;
+        }
+
+        #gameCanvas {
+            border: 2px solid #333;
+            background-color: #000;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #fileInfo {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 RockStarter Note Viewer</h1>
+        <p>JSON 차트 파일을 업로드하여 노트 패턴을 확인하세요</p>
+    </div>
+
+    <div class="controls">
+        <input type="file" id="fileInput" accept=".json" style="display: none;">
+        <button id="loadBtn">📁 JSON 파일 로드</button>
+        
+        <input type="file" id="audioInput" accept=".mp3,.wav,.m4a" style="display: none;">
+        <button id="loadAudioBtn" disabled>🎵 음악 파일 로드</button>
+        
+        <button id="playBtn" disabled>▶️ 재생</button>
+        <button id="pauseBtn" disabled>⏸️ 일시정지</button>
+        <button id="resetBtn" disabled>🔄 리셋</button>
+        
+        <div class="speed-control">
+            <label for="speedSlider">속도:</label>
+            <input type="range" id="speedSlider" min="100" max="500" value="200">
+            <span id="speedValue">200</span>
+        </div>
+    </div>
+
+    <audio id="gameAudio" preload="auto"></audio>
+
+    <div class="info-panel">
+        <div>🎵 BPM: <span id="bpmValue">--</span></div>
+        <div>⏱️ 시간: <span id="timeValue">0.00s</span></div>
+        <div>🎯 노트: <span id="noteCount">0</span></div>
+        <div>📊 현재 노트: <span id="activeNotes">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <div id="fileInfo"></div>
+
+    <script>
+        class NoteViewer {
+            constructor() {
+                this.canvas = document.getElementById('gameCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.audio = document.getElementById('gameAudio');
+                
+                // Chart data
+                this.chartData = null;
+                this.notes = [];
+                this.bpm = 120;
+                this.audioLoaded = false;
+                this.vocalSections = [];
+                
+                // Playback state
+                this.isPlaying = false;
+                this.currentTime = 0;
+                this.startTime = 0;
+                this.animationId = null;
+                
+                // Display settings
+                this.lanes = 4;
+                this.laneWidth = 150;
+                this.noteSize = 15;
+                this.speed = 200;
+                this.hitLineY = 500;
+                this.lookAheadTime = 2.0;
+                this.startDelay = 5;
+                
+                // Hit detection
+                this.hitLineActive = false;
+                this.hitLineTimer = 0;
+                
+                this.setupEventListeners();
+                this.drawLanes();
+            }
+
+            setupEventListeners() {
+                const fileInput = document.getElementById('fileInput');
+                const loadBtn = document.getElementById('loadBtn');
+                
+                loadBtn.addEventListener('click', () => {
+                    fileInput.click();
+                });
+                
+                fileInput.addEventListener('change', (e) => {
+                    this.loadJSON(e.target.files[0]);
+                });
+
+                const audioInput = document.getElementById('audioInput');
+                const loadAudioBtn = document.getElementById('loadAudioBtn');
+                
+                loadAudioBtn.addEventListener('click', () => {
+                    audioInput.click();
+                });
+                
+                audioInput.addEventListener('change', (e) => {
+                    this.loadAudio(e.target.files[0]);
+                });
+
+                document.getElementById('playBtn').addEventListener('click', () => {
+                    this.play();
+                });
+
+                document.getElementById('pauseBtn').addEventListener('click', () => {
+                    this.pause();
+                });
+
+                document.getElementById('resetBtn').addEventListener('click', () => {
+                    this.reset();
+                });
+
+                const speedSlider = document.getElementById('speedSlider');
+                speedSlider.addEventListener('input', (e) => {
+                    this.speed = parseInt(e.target.value);
+                    document.getElementById('speedValue').textContent = this.speed;
+                });
+            }
+
+            async loadJSON(file) {
+                if (!file) return;
+
+                try {
+                    const text = await file.text();
+                    this.chartData = JSON.parse(text);
+                    this.loadChartData();
+                    
+                    document.getElementById('fileInfo').innerHTML = 
+                        `✅ 로드 완료: ${file.name} (${(file.size / 1024).toFixed(1)}KB)`;
+                } catch (error) {
+                    alert('JSON 파일 로드 실패: ' + error.message);
+                    document.getElementById('fileInfo').innerHTML = 
+                        `❌ 로드 실패: ${error.message}`;
+                }
+            }
+
+            loadChartData() {
+                if (!this.chartData) return;
+
+                const timing = this.chartData.timing || {};
+                this.bpm = timing.bpm || 120;
+
+                this.notes = [];
+                const notesData = this.chartData.notes || [];
+
+                notesData.forEach(noteData => {
+                    this.notes.push({
+                        time: noteData.time_seconds || 0,
+                        lane: noteData.lane || 0,
+                        type: noteData.type || 'tap',
+                        intensity: noteData.intensity || 1.0
+                    });
+                });
+
+                this.notes.sort((a, b) => a.time - b.time);
+
+                // 보컬 구역 정보 로드
+                this.vocalSections = this.chartData.vocal_sections || [];
+
+                document.getElementById('bpmValue').textContent = this.bpm.toFixed(1);
+                document.getElementById('noteCount').textContent = this.notes.length;
+
+                const audioFile = this.chartData?.metadata?.audio_file;
+                if (audioFile) {
+                    document.getElementById('fileInfo').innerHTML += 
+                        `<br>🎵 음악 파일: ${audioFile} (수동으로 로드하세요)`;
+                }
+
+                document.getElementById('loadAudioBtn').disabled = false;
+                document.getElementById('resetBtn').disabled = false;
+                this.updatePlayButton();
+
+                this.reset();
+            }
+
+            loadAudio(file) {
+                if (!file) return;
+
+                const url = URL.createObjectURL(file);
+                this.audio.src = url;
+                this.audioLoaded = true;
+
+                this.audio.addEventListener('loadeddata', () => {
+                    document.getElementById('fileInfo').innerHTML += 
+                        `<br>🎵 음악 로드 완료: ${file.name}`;
+                    this.updatePlayButton();
+                }, { once: true });
+
+                this.audio.addEventListener('error', () => {
+                    alert('음악 파일 로드 실패');
+                    this.audioLoaded = false;
+                    this.updatePlayButton();
+                });
+            }
+
+            updatePlayButton() {
+                const hasChart = this.notes.length > 0;
+                const hasAudio = this.audioLoaded;
+                document.getElementById('playBtn').disabled = !(hasChart && hasAudio);
+            }
+
+            play() {
+                if (!this.notes.length || !this.audioLoaded) return;
+
+                this.isPlaying = true;
+                if (this.currentTime === 0) {
+                    this.startTime = performance.now();
+                } else {
+                    this.startTime = performance.now() - (this.currentTime * 1000);
+                }
+                
+                setTimeout(() => {
+                    if (this.isPlaying) {
+                        const audioStartTime = Math.max(0, this.currentTime - this.startDelay);
+                        this.audio.currentTime = audioStartTime;
+                        this.audio.play().catch(e => {
+                            console.error('Audio play failed:', e);
+                        });
+                    }
+                }, Math.max(0, (this.startDelay - this.currentTime) * 1000));
+                
+                document.getElementById('playBtn').disabled = true;
+                document.getElementById('pauseBtn').disabled = false;
+                
+                this.animate();
+            }
+
+            pause() {
+                this.isPlaying = false;
+                
+                if (this.audio && !this.audio.paused) {
+                    this.audio.pause();
+                }
+                
+                document.getElementById('playBtn').disabled = false;
+                document.getElementById('pauseBtn').disabled = true;
+                
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+
+            reset() {
+                this.pause();
+                this.currentTime = 0;
+                
+                if (this.audio) {
+                    this.audio.currentTime = 0;
+                }
+                
+                document.getElementById('timeValue').textContent = '0.00s';
+                document.getElementById('activeNotes').textContent = '0';
+                this.draw();
+            }
+
+            animate() {
+                if (!this.isPlaying) return;
+
+                const elapsedTime = (performance.now() - this.startTime) / 1000;
+                
+                if (elapsedTime < this.startDelay) {
+                    this.currentTime = elapsedTime;
+                } else {
+                    if (this.audio && !this.audio.paused) {
+                        this.currentTime = this.audio.currentTime + this.startDelay;
+                    } else {
+                        this.currentTime = elapsedTime;
+                    }
+                }
+
+                this.draw();
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.drawLanes();
+                this.drawNotes();
+                document.getElementById('timeValue').textContent = this.currentTime.toFixed(2) + 's';
+            }
+
+            drawLanes() {
+                const startX = (this.canvas.width - (this.lanes * this.laneWidth)) / 2;
+
+                this.ctx.strokeStyle = '#444';
+                this.ctx.lineWidth = 2;
+
+                for (let i = 0; i <= this.lanes; i++) {
+                    const x = startX + (i * this.laneWidth);
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x, 0);
+                    this.ctx.lineTo(x, this.hitLineY + 50);
+                    this.ctx.stroke();
+                }
+
+                this.ctx.fillStyle = '#666';
+                this.ctx.font = '14px Arial';
+                this.ctx.textAlign = 'center';
+
+                for (let i = 0; i < this.lanes; i++) {
+                    const x = startX + (i * this.laneWidth) + (this.laneWidth / 2);
+                    this.ctx.fillText(`Lane ${i}`, x, this.hitLineY + 30);
+                }
+
+                // 히트라인 그리기 - 히트 상태에 따라 색상 변경
+                const hitLineColor = this.hitLineActive ? '#ffff00' : '#ff4444';
+                this.ctx.strokeStyle = hitLineColor;
+                this.ctx.lineWidth = this.hitLineActive ? 6 : 4;
+                this.ctx.beginPath();
+                this.ctx.moveTo(startX, this.hitLineY);
+                this.ctx.lineTo(startX + (this.lanes * this.laneWidth), this.hitLineY);
+                this.ctx.stroke();
+
+                this.ctx.fillStyle = hitLineColor;
+                this.ctx.font = this.hitLineActive ? 'bold 18px Arial' : 'bold 16px Arial';
+                this.ctx.textAlign = 'right';
+                this.ctx.fillText('HIT', startX - 10, this.hitLineY + 5);
+            }
+
+            drawVocalSections() {
+                if (!this.vocalSections || this.vocalSections.length === 0) return;
+
+                const startX = (this.canvas.width - (this.lanes * this.laneWidth)) / 2;
+                const laneAreaWidth = this.lanes * this.laneWidth;
+
+                this.vocalSections.forEach(section => {
+                    // 노트와 완전히 동일한 타이밍 계산 방식
+                    const sectionStartHitTime = section.start_time + this.startDelay;
+                    const sectionEndHitTime = section.end_time + this.startDelay;
+                    
+                    const startTimeDiff = sectionStartHitTime - this.currentTime;
+                    const endTimeDiff = sectionEndHitTime - this.currentTime;
+                    
+                    // Y 좌표 계산 (노트와 동일한 방식)
+                    const startY = this.hitLineY - (startTimeDiff * this.speed);
+                    const endY = this.hitLineY - (endTimeDiff * this.speed);
+                    
+                    // 구간 높이 (항상 양수)
+                    const sectionHeight = Math.abs(endY - startY);
+                    const topY = Math.min(startY, endY);
+                    const bottomY = Math.max(startY, endY);
+
+                    // 화면에 보이는 구간만 그리기
+                    if (bottomY >= -50 && topY <= this.canvas.height + 50) {
+                        
+                        // 보컬 타입별 색상 및 투명도
+                        let fillColor, strokeColor, textColor;
+                        switch (section.vocal_type) {
+                            case 'rap':
+                                fillColor = 'rgba(255, 80, 80, 0.25)';
+                                strokeColor = 'rgba(255, 80, 80, 0.6)';
+                                textColor = 'rgba(255, 150, 150, 0.9)';
+                                break;
+                            case 'main_vocal':
+                                fillColor = 'rgba(80, 255, 80, 0.25)';
+                                strokeColor = 'rgba(80, 255, 80, 0.6)';
+                                textColor = 'rgba(150, 255, 150, 0.9)';
+                                break;
+                            case 'sub_vocal':
+                                fillColor = 'rgba(255, 255, 80, 0.25)';
+                                strokeColor = 'rgba(255, 255, 80, 0.6)';
+                                textColor = 'rgba(255, 255, 150, 0.9)';
+                                break;
+                            case 'intro':
+                                fillColor = 'rgba(255, 150, 255, 0.2)';
+                                strokeColor = 'rgba(255, 150, 255, 0.5)';
+                                textColor = 'rgba(255, 200, 255, 0.8)';
+                                break;
+                            case 'instrumental':
+                                fillColor = 'rgba(120, 120, 255, 0.15)';
+                                strokeColor = 'rgba(120, 120, 255, 0.4)';
+                                textColor = 'rgba(180, 180, 255, 0.7)';
+                                break;
+                            default:
+                                fillColor = 'rgba(200, 200, 200, 0.15)';
+                                strokeColor = 'rgba(200, 200, 200, 0.4)';
+                                textColor = 'rgba(220, 220, 220, 0.7)';
+                        }
+
+                        // 배경 영역 그리기
+                        this.ctx.fillStyle = fillColor;
+                        this.ctx.fillRect(startX - 5, topY, laneAreaWidth + 10, sectionHeight);
+
+                        // 테두리 그리기
+                        this.ctx.strokeStyle = strokeColor;
+                        this.ctx.lineWidth = 2;
+                        this.ctx.strokeRect(startX - 5, topY, laneAreaWidth + 10, sectionHeight);
+
+                        // 좌측 라벨 영역
+                        this.ctx.fillStyle = fillColor.replace(/0\.\d+/, '0.4');
+                        this.ctx.fillRect(startX - 80, topY, 70, sectionHeight);
+                        
+                        this.ctx.strokeStyle = strokeColor;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.strokeRect(startX - 80, topY, 70, sectionHeight);
+
+                        // 텍스트 표시 (구간이 충분히 클 때)
+                        if (sectionHeight > 25) {
+                            this.ctx.fillStyle = textColor;
+                            this.ctx.font = 'bold 11px Arial';
+                            this.ctx.textAlign = 'center';
+                            
+                            // 구간명
+                            const labelY = topY + sectionHeight / 2 - 8;
+                            this.ctx.fillText(section.section_name, startX - 45, labelY);
+                            
+                            // 보컬 타입
+                            this.ctx.font = '9px Arial';
+                            const typeY = topY + sectionHeight / 2 + 6;
+                            this.ctx.fillText(`(${section.vocal_type})`, startX - 45, typeY);
+                            
+                            // 밀도 정보 (오른쪽)
+                            if (sectionHeight > 40) {
+                                this.ctx.font = '10px Arial';
+                                this.ctx.textAlign = 'right';
+                                const densityY = topY + sectionHeight / 2;
+                                this.ctx.fillText(`${section.note_density}/s`, startX + laneAreaWidth, densityY);
+                            }
+                        }
+
+                        // 현재 재생 중인 구간 강조 (히트 라인 기준)
+                        const currentMusicTime = Math.max(0, this.currentTime - this.startDelay);
+                        if (currentMusicTime >= section.start_time && currentMusicTime < section.end_time) {
+                            this.ctx.strokeStyle = strokeColor.replace(/0\.\d+/, '1.0');
+                            this.ctx.lineWidth = 3;
+                            this.ctx.strokeRect(startX - 5, topY, laneAreaWidth + 10, sectionHeight);
+                        }
+                    }
+                });
+            }
+
+            drawNotes() {
+                const startX = (this.canvas.width - (this.lanes * this.laneWidth)) / 2;
+                let activeNotesCount = 0;
+                let hitDetected = false;
+
+                this.notes.forEach(note => {
+                    const noteHitTime = note.time + this.startDelay;
+                    const timeDiff = noteHitTime - this.currentTime;
+                    const noteY = this.hitLineY - (timeDiff * this.speed);
+
+                    // 히트 감지 - 노트 타이밍 기준
+                    const originalTimeDiff = note.time - (this.currentTime - this.startDelay);
+                    if (this.currentTime >= this.startDelay && Math.abs(originalTimeDiff) <= 0.05) {
+                        hitDetected = true;
+                    }
+
+                    const screenTop = -100;
+                    const screenBottom = this.canvas.height + 100;
+                    
+                    if (noteY >= screenTop && noteY <= screenBottom) {
+                        activeNotesCount++;
+                        this.drawNote(note, startX, noteY);
+                    }
+                });
+
+                // 히트라인 활성 상태 업데이트
+                if (hitDetected) {
+                    this.hitLineActive = true;
+                    this.hitLineTimer = performance.now() + 200;
+                } else if (performance.now() > this.hitLineTimer) {
+                    this.hitLineActive = false;
+                }
+
+                document.getElementById('activeNotes').textContent = activeNotesCount;
+            }
+
+            drawNote(note, startX, y) {
+                const laneX = startX + (note.lane * this.laneWidth);
+                const noteX = laneX + (this.laneWidth / 2);
+
+                let color;
+                if (note.type === 'tap') {
+                    color = this.getNoteColor(note.intensity);
+                } else if (note.type === 'hold') {
+                    color = '#ffff44';
+                } else {
+                    color = '#ffffff';
+                }
+
+                this.ctx.fillStyle = color;
+                this.ctx.strokeStyle = '#ffffff';
+                this.ctx.lineWidth = 2;
+
+                this.ctx.beginPath();
+                this.ctx.arc(noteX, y, this.noteSize, 0, Math.PI * 2);
+                this.ctx.fill();
+                this.ctx.stroke();
+
+                if (note.type === 'hold') {
+                    this.ctx.fillStyle = color;
+                    this.ctx.font = 'bold 10px Arial';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText('H', noteX, y + 3);
+                }
+            }
+
+            getNoteColor(intensity) {
+                if (intensity >= 0.8) return '#ff4444';
+                if (intensity >= 0.6) return '#ff8844';
+                if (intensity >= 0.4) return '#ffff44';
+                return '#88ff44';
+            }
+        }
+
+        const viewer = new NoteViewer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1591 @@
+{
+  "metadata": {
+    "title": "Generated Rhythm Chart",
+    "description": "박자 기반 노트 + 보컬 외침 감지",
+    "generator": "RhythmGameNoteGenerator v1.0",
+    "audio_file": "get-yo-hands-up.mp3"
+  },
+  "timing": {
+    "bpm": 126.04801829268293,
+    "sample_rate": 44100,
+    "beat_interval_ms": 476
+  },
+  "notes": [
+    {
+      "time_seconds": 0.046,
+      "time_milliseconds": 46,
+      "time_samples": 2048,
+      "lane": 1,
+      "type": "hold",
+      "intensity": 0.98,
+      "beat_position": 1,
+      "source": "rhythm",
+      "duration_seconds": 0.5,
+      "duration_milliseconds": 500,
+      "duration_samples": 22050
+    },
+    {
+      "time_seconds": 1.974,
+      "time_milliseconds": 1974,
+      "time_samples": 87040,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.35,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 2.322,
+      "time_milliseconds": 2322,
+      "time_samples": 102400,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.7,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 2.926,
+      "time_milliseconds": 2926,
+      "time_samples": 129024,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.47,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 3.889,
+      "time_milliseconds": 3889,
+      "time_samples": 171520,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 4.853,
+      "time_milliseconds": 4853,
+      "time_samples": 214016,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 5.805,
+      "time_milliseconds": 5805,
+      "time_samples": 256000,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 6.769,
+      "time_milliseconds": 6769,
+      "time_samples": 298496,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.52,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 7.732,
+      "time_milliseconds": 7732,
+      "time_samples": 340992,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 8.081,
+      "time_milliseconds": 8081,
+      "time_samples": 356352,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 8.684,
+      "time_milliseconds": 8684,
+      "time_samples": 382976,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.54,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 9.16,
+      "time_milliseconds": 9160,
+      "time_samples": 403968,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.44,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 9.648,
+      "time_milliseconds": 9648,
+      "time_samples": 425472,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.44,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 10.612,
+      "time_milliseconds": 10612,
+      "time_samples": 467968,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.5,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 12.527,
+      "time_milliseconds": 12527,
+      "time_samples": 552448,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 13.491,
+      "time_milliseconds": 13491,
+      "time_samples": 594944,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 14.443,
+      "time_milliseconds": 14443,
+      "time_samples": 636928,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.4,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 14.907,
+      "time_milliseconds": 14907,
+      "time_samples": 657408,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 15.406,
+      "time_milliseconds": 15406,
+      "time_samples": 679424,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 16.37,
+      "time_milliseconds": 16370,
+      "time_samples": 721920,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.42,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 16.846,
+      "time_milliseconds": 16846,
+      "time_samples": 742912,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.45,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 17.334,
+      "time_milliseconds": 17334,
+      "time_samples": 764416,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.46,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 19.482,
+      "time_milliseconds": 19482,
+      "time_samples": 859136,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.66,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 20.213,
+      "time_milliseconds": 20213,
+      "time_samples": 891392,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 20.689,
+      "time_milliseconds": 20689,
+      "time_samples": 912384,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 21.165,
+      "time_milliseconds": 21165,
+      "time_samples": 933376,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.22,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 21.641,
+      "time_milliseconds": 21641,
+      "time_samples": 954368,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.24,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 22.129,
+      "time_milliseconds": 22129,
+      "time_samples": 975872,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 22.605,
+      "time_milliseconds": 22605,
+      "time_samples": 996864,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 23.092,
+      "time_milliseconds": 23092,
+      "time_samples": 1018368,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 23.568,
+      "time_milliseconds": 23568,
+      "time_samples": 1039360,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 24.044,
+      "time_milliseconds": 24044,
+      "time_samples": 1060352,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 24.532,
+      "time_milliseconds": 24532,
+      "time_samples": 1081856,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 25.008,
+      "time_milliseconds": 25008,
+      "time_samples": 1102848,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.49,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 25.972,
+      "time_milliseconds": 25972,
+      "time_samples": 1145344,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 26.924,
+      "time_milliseconds": 26924,
+      "time_samples": 1187328,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 27.411,
+      "time_milliseconds": 27411,
+      "time_samples": 1208832,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 27.887,
+      "time_milliseconds": 27887,
+      "time_samples": 1229824,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 28.363,
+      "time_milliseconds": 28363,
+      "time_samples": 1250816,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.39,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 28.851,
+      "time_milliseconds": 28851,
+      "time_samples": 1272320,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 29.327,
+      "time_milliseconds": 29327,
+      "time_samples": 1293312,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.23,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 29.814,
+      "time_milliseconds": 29814,
+      "time_samples": 1314816,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.21,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 30.279,
+      "time_milliseconds": 30279,
+      "time_samples": 1335296,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.21,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 30.766,
+      "time_milliseconds": 30766,
+      "time_samples": 1356800,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 31.242,
+      "time_milliseconds": 31242,
+      "time_samples": 1377792,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.24,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 32.206,
+      "time_milliseconds": 32206,
+      "time_samples": 1420288,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.53,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 32.694,
+      "time_milliseconds": 32694,
+      "time_samples": 1441792,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.4,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 33.17,
+      "time_milliseconds": 33170,
+      "time_samples": 1462784,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.37,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 34.133,
+      "time_milliseconds": 34133,
+      "time_samples": 1505280,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.47,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 34.609,
+      "time_milliseconds": 34609,
+      "time_samples": 1526272,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 35.085,
+      "time_milliseconds": 35085,
+      "time_samples": 1547264,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 35.573,
+      "time_milliseconds": 35573,
+      "time_samples": 1568768,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.21,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 36.049,
+      "time_milliseconds": 36049,
+      "time_samples": 1589760,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.2,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 36.525,
+      "time_milliseconds": 36525,
+      "time_samples": 1610752,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 37.013,
+      "time_milliseconds": 37013,
+      "time_samples": 1632256,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 37.489,
+      "time_milliseconds": 37489,
+      "time_samples": 1653248,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.24,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 37.965,
+      "time_milliseconds": 37965,
+      "time_samples": 1674240,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.44,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 38.452,
+      "time_milliseconds": 38452,
+      "time_samples": 1695744,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.24,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 38.928,
+      "time_milliseconds": 38928,
+      "time_samples": 1716736,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 39.892,
+      "time_milliseconds": 39892,
+      "time_samples": 1759232,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.2,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 40.368,
+      "time_milliseconds": 40368,
+      "time_samples": 1780224,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.71,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 40.856,
+      "time_milliseconds": 40856,
+      "time_samples": 1801728,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 41.808,
+      "time_milliseconds": 41808,
+      "time_samples": 1843712,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.72,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 42.771,
+      "time_milliseconds": 42771,
+      "time_samples": 1886208,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 44.211,
+      "time_milliseconds": 44211,
+      "time_samples": 1949696,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.56,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 44.687,
+      "time_milliseconds": 44687,
+      "time_samples": 1970688,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 45.627,
+      "time_milliseconds": 45627,
+      "time_samples": 2012160,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 46.614,
+      "time_milliseconds": 46614,
+      "time_samples": 2055680,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.35,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 48.054,
+      "time_milliseconds": 48054,
+      "time_samples": 2119168,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 49.006,
+      "time_milliseconds": 49006,
+      "time_samples": 2161152,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.44,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 49.482,
+      "time_milliseconds": 49482,
+      "time_samples": 2182144,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 49.969,
+      "time_milliseconds": 49969,
+      "time_samples": 2203648,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 50.933,
+      "time_milliseconds": 50933,
+      "time_samples": 2246144,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.35,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 51.885,
+      "time_milliseconds": 51885,
+      "time_samples": 2288128,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 52.849,
+      "time_milliseconds": 52849,
+      "time_samples": 2330624,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.52,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 53.812,
+      "time_milliseconds": 53812,
+      "time_samples": 2373120,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 54.161,
+      "time_milliseconds": 54161,
+      "time_samples": 2388480,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.67,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 54.764,
+      "time_milliseconds": 54764,
+      "time_samples": 2415104,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.5,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 55.24,
+      "time_milliseconds": 55240,
+      "time_samples": 2436096,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 55.728,
+      "time_milliseconds": 55728,
+      "time_samples": 2457600,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.42,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 56.692,
+      "time_milliseconds": 56692,
+      "time_samples": 2500096,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.47,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 57.156,
+      "time_milliseconds": 57156,
+      "time_samples": 2520576,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 57.644,
+      "time_milliseconds": 57644,
+      "time_samples": 2542080,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.3,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 58.607,
+      "time_milliseconds": 58607,
+      "time_samples": 2584576,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.4,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 59.571,
+      "time_milliseconds": 59571,
+      "time_samples": 2627072,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.32,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 60.523,
+      "time_milliseconds": 60523,
+      "time_samples": 2669056,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 60.999,
+      "time_milliseconds": 60999,
+      "time_samples": 2690048,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.29,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 61.486,
+      "time_milliseconds": 61486,
+      "time_samples": 2711552,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.35,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 61.846,
+      "time_milliseconds": 61846,
+      "time_samples": 2727424,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 62.45,
+      "time_milliseconds": 62450,
+      "time_samples": 2754048,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 62.926,
+      "time_milliseconds": 62926,
+      "time_samples": 2775040,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.38,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 63.402,
+      "time_milliseconds": 63402,
+      "time_samples": 2796032,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 67.245,
+      "time_milliseconds": 67245,
+      "time_samples": 2965504,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.55,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 70.612,
+      "time_milliseconds": 70612,
+      "time_samples": 3113984,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 73.004,
+      "time_milliseconds": 73004,
+      "time_samples": 3219456,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.25,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 73.491,
+      "time_milliseconds": 73491,
+      "time_samples": 3240960,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 73.967,
+      "time_milliseconds": 73967,
+      "time_samples": 3261952,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 74.443,
+      "time_milliseconds": 74443,
+      "time_samples": 3282944,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 74.931,
+      "time_milliseconds": 74931,
+      "time_samples": 3304448,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.64,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 75.407,
+      "time_milliseconds": 75407,
+      "time_samples": 3325440,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 75.894,
+      "time_milliseconds": 75894,
+      "time_samples": 3346944,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 76.37,
+      "time_milliseconds": 76370,
+      "time_samples": 3367936,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.35,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 76.846,
+      "time_milliseconds": 76846,
+      "time_samples": 3388928,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 78.762,
+      "time_milliseconds": 78762,
+      "time_samples": 3473408,
+      "lane": 2,
+      "type": "hold",
+      "intensity": 1.0,
+      "beat_position": 1,
+      "source": "rhythm",
+      "duration_seconds": 0.5,
+      "duration_milliseconds": 500,
+      "duration_samples": 22050
+    },
+    {
+      "time_seconds": 79.25,
+      "time_milliseconds": 79250,
+      "time_samples": 3494912,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.39,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 80.202,
+      "time_milliseconds": 80202,
+      "time_samples": 3536896,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.59,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 80.689,
+      "time_milliseconds": 80689,
+      "time_samples": 3558400,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 81.165,
+      "time_milliseconds": 81165,
+      "time_samples": 3579392,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.27,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 82.605,
+      "time_milliseconds": 82605,
+      "time_samples": 3642880,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 83.081,
+      "time_milliseconds": 83081,
+      "time_samples": 3663872,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.5,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 84.045,
+      "time_milliseconds": 84045,
+      "time_samples": 3706368,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.47,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 85.008,
+      "time_milliseconds": 85008,
+      "time_samples": 3748864,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.4,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 86.448,
+      "time_milliseconds": 86448,
+      "time_samples": 3812352,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.74,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 86.924,
+      "time_milliseconds": 86924,
+      "time_samples": 3833344,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 87.876,
+      "time_milliseconds": 87876,
+      "time_samples": 3875328,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.57,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 88.851,
+      "time_milliseconds": 88851,
+      "time_samples": 3918336,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 90.291,
+      "time_milliseconds": 90291,
+      "time_samples": 3981824,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.5,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 90.767,
+      "time_milliseconds": 90767,
+      "time_samples": 4002816,
+      "lane": 3,
+      "type": "tap",
+      "intensity": 0.37,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 91.707,
+      "time_milliseconds": 91707,
+      "time_samples": 4044288,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.32,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 92.206,
+      "time_milliseconds": 92206,
+      "time_samples": 4066304,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 92.682,
+      "time_milliseconds": 92682,
+      "time_samples": 4087296,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.62,
+      "beat_position": 2,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 93.17,
+      "time_milliseconds": 93170,
+      "time_samples": 4108800,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.7,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 94.482,
+      "time_milliseconds": 94482,
+      "time_samples": 4166656,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.67,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 95.086,
+      "time_milliseconds": 95086,
+      "time_samples": 4193280,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.45,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 95.562,
+      "time_milliseconds": 95562,
+      "time_samples": 4214272,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 96.049,
+      "time_milliseconds": 96049,
+      "time_samples": 4235776,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.34,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 97.013,
+      "time_milliseconds": 97013,
+      "time_samples": 4278272,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.36,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 97.965,
+      "time_milliseconds": 97965,
+      "time_samples": 4320256,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 98.929,
+      "time_milliseconds": 98929,
+      "time_samples": 4362752,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.53,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 99.892,
+      "time_milliseconds": 99892,
+      "time_samples": 4405248,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.32,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 100.241,
+      "time_milliseconds": 100241,
+      "time_samples": 4420608,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.69,
+      "source": "vocal_shout"
+    },
+    {
+      "time_seconds": 100.844,
+      "time_milliseconds": 100844,
+      "time_samples": 4447232,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.53,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 101.32,
+      "time_milliseconds": 101320,
+      "time_samples": 4468224,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 101.808,
+      "time_milliseconds": 101808,
+      "time_samples": 4489728,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 102.772,
+      "time_milliseconds": 102772,
+      "time_samples": 4532224,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.47,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 103.236,
+      "time_milliseconds": 103236,
+      "time_samples": 4552704,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.26,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 103.724,
+      "time_milliseconds": 103724,
+      "time_samples": 4574208,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.28,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 104.687,
+      "time_milliseconds": 104687,
+      "time_samples": 4616704,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.43,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 105.651,
+      "time_milliseconds": 105651,
+      "time_samples": 4659200,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.33,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 106.603,
+      "time_milliseconds": 106603,
+      "time_samples": 4701184,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 107.079,
+      "time_milliseconds": 107079,
+      "time_samples": 4722176,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 107.566,
+      "time_milliseconds": 107566,
+      "time_samples": 4743680,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.31,
+      "beat_position": 1,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 108.53,
+      "time_milliseconds": 108530,
+      "time_samples": 4786176,
+      "lane": 2,
+      "type": "tap",
+      "intensity": 0.53,
+      "beat_position": 3,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 109.006,
+      "time_milliseconds": 109006,
+      "time_samples": 4807168,
+      "lane": 1,
+      "type": "tap",
+      "intensity": 0.54,
+      "beat_position": 4,
+      "source": "rhythm"
+    },
+    {
+      "time_seconds": 109.494,
+      "time_milliseconds": 109494,
+      "time_samples": 4828672,
+      "lane": 0,
+      "type": "tap",
+      "intensity": 0.41,
+      "beat_position": 1,
+      "source": "rhythm"
+    }
+  ],
+  "stats": {
+    "rhythm_notes": 137,
+    "vocal_shout_notes": 8,
+    "total_notes": 145
+  },
+  "vocal_sections": [
+    {
+      "start_time": 0,
+      "end_time": 10,
+      "section_name": "intro",
+      "vocal_type": "sub_vocal",
+      "note_count": 13,
+      "note_density": 1.3,
+      "avg_intensity": 0.5,
+      "rhythm_notes": 11,
+      "vocal_shouts": 2
+    },
+    {
+      "start_time": 10,
+      "end_time": 20,
+      "section_name": "verse1",
+      "vocal_type": "sub_vocal",
+      "note_count": 10,
+      "note_density": 1.0,
+      "avg_intensity": 0.46,
+      "rhythm_notes": 8,
+      "vocal_shouts": 2
+    },
+    {
+      "start_time": 20,
+      "end_time": 30,
+      "section_name": "pre_chorus",
+      "vocal_type": "main_vocal",
+      "note_count": 19,
+      "note_density": 1.9,
+      "avg_intensity": 0.28,
+      "rhythm_notes": 19,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 30,
+      "end_time": 40,
+      "section_name": "chorus",
+      "vocal_type": "main_vocal",
+      "note_count": 18,
+      "note_density": 1.8,
+      "avg_intensity": 0.32,
+      "rhythm_notes": 18,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 40,
+      "end_time": 50,
+      "section_name": "verse2",
+      "vocal_type": "main_vocal",
+      "note_count": 12,
+      "note_density": 1.2,
+      "avg_intensity": 0.42,
+      "rhythm_notes": 12,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 50,
+      "end_time": 60,
+      "section_name": "chorus2",
+      "vocal_type": "main_vocal",
+      "note_count": 13,
+      "note_density": 1.3,
+      "avg_intensity": 0.41,
+      "rhythm_notes": 12,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 60,
+      "end_time": 70,
+      "section_name": "bridge",
+      "vocal_type": "main_vocal",
+      "note_count": 8,
+      "note_density": 0.8,
+      "avg_intensity": 0.42,
+      "rhythm_notes": 7,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 70,
+      "end_time": 80,
+      "section_name": "outro",
+      "vocal_type": "main_vocal",
+      "note_count": 12,
+      "note_density": 1.2,
+      "avg_intensity": 0.38,
+      "rhythm_notes": 12,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 80,
+      "end_time": 90,
+      "section_name": "instrumental",
+      "vocal_type": "main_vocal",
+      "note_count": 11,
+      "note_density": 1.1,
+      "avg_intensity": 0.43,
+      "rhythm_notes": 11,
+      "vocal_shouts": 0
+    },
+    {
+      "start_time": 90,
+      "end_time": 100,
+      "section_name": "section_10",
+      "vocal_type": "main_vocal",
+      "note_count": 14,
+      "note_density": 1.4,
+      "avg_intensity": 0.43,
+      "rhythm_notes": 13,
+      "vocal_shouts": 1
+    },
+    {
+      "start_time": 100,
+      "end_time": 109.5,
+      "section_name": "section_11",
+      "vocal_type": "main_vocal",
+      "note_count": 14,
+      "note_density": 1.47,
+      "avg_intensity": 0.42,
+      "rhythm_notes": 13,
+      "vocal_shouts": 1
+    }
+  ]
+}

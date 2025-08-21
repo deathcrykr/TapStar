@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>L07_gaug01_001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 14}, {588, 70}}</string>
+			<key>spriteOffset</key>
+			<string>{3, 520}</string>
+			<key>spriteSize</key>
+			<string>{588, 70}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{598, 0}, {70, 588}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>L08_gauge02_001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{23, 1072}, {594, 66}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -536}</string>
+			<key>spriteSize</key>
+			<string>{594, 66}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {594, 66}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_A00000.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {314, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{28, 521}</string>
+			<key>spriteSize</key>
+			<string>{314, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{348, 364}, {54, 314}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_A00001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {328, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{35, 521}</string>
+			<key>spriteSize</key>
+			<string>{328, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{60, 306}, {328, 54}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_A00002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {314, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{28, 521}</string>
+			<key>spriteSize</key>
+			<string>{314, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{406, 128}, {54, 314}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_A00003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {314, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{28, 521}</string>
+			<key>spriteSize</key>
+			<string>{314, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{290, 364}, {54, 314}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_A00004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {314, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{28, 521}</string>
+			<key>spriteSize</key>
+			<string>{314, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{406, 592}, {314, 54}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_B00000.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {324, 56}}</string>
+			<key>spriteOffset</key>
+			<string>{33, 520}</string>
+			<key>spriteSize</key>
+			<string>{324, 56}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{60, 186}, {324, 56}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_B00001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {330, 56}}</string>
+			<key>spriteOffset</key>
+			<string>{36, 520}</string>
+			<key>spriteSize</key>
+			<string>{330, 56}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 70}, {56, 330}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_B00002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {320, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{31, 521}</string>
+			<key>spriteSize</key>
+			<string>{320, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{232, 364}, {54, 320}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_B00003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {320, 56}}</string>
+			<key>spriteOffset</key>
+			<string>{31, 520}</string>
+			<key>spriteSize</key>
+			<string>{320, 56}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{60, 246}, {320, 56}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_B00004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {322, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{32, 521}</string>
+			<key>spriteSize</key>
+			<string>{322, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{174, 364}, {54, 322}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_C00000.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {326, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{34, 521}</string>
+			<key>spriteSize</key>
+			<string>{326, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{116, 364}, {54, 326}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_C00001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {334, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{38, 521}</string>
+			<key>spriteSize</key>
+			<string>{334, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{60, 128}, {334, 54}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>gauge_C00002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {346, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{44, 521}</string>
+			<key>spriteSize</key>
+			<string>{346, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{58, 404}, {54, 346}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_C00003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {356, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{49, 521}</string>
+			<key>spriteSize</key>
+			<string>{356, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 404}, {54, 356}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>gauge_C00004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{191, 21}, {344, 54}}</string>
+			<key>spriteOffset</key>
+			<string>{43, 521}</string>
+			<key>spriteSize</key>
+			<string>{344, 54}</string>
+			<key>spriteSourceSize</key>
+			<string>{640, 1138}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{60, 70}, {344, 54}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.6.0</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+		<key>name</key>
+		<string>ui.zwd</string>
+		<key>textureFileName</key>
+		<string>ui.png</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+	</dict>
+</dict>
+</plist>
