@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: /Users/deathcry/Work/TapStar/FMOD/TapStar/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638914280748833493
+  lastModified: 638914280748833492
   FileSizes:
   - Name: Desktop
     Value: 3433856
@@ -43,7 +43,7 @@ MonoBehaviour:
   - {fileID: -8488498285576519799}
   StringsBanks:
   - {fileID: 7809824937397180934}
-  cacheTime: 638914280748854579
+  cacheTime: 638914280748854578
   cacheVersion: 131632
 --- !u!114 &933062412577461349
 MonoBehaviour:
@@ -114,7 +114,7 @@ MonoBehaviour:
   Path: /Users/deathcry/Work/TapStar/FMOD/TapStar/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638914280748854579
+  lastModified: 638914280748854578
   FileSizes:
   - Name: Desktop
     Value: 814
