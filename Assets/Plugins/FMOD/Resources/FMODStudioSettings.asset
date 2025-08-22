@@ -547,7 +547,7 @@ MonoBehaviour:
   EncryptionKey: 
   ImportType: 0
   TargetAssetPath: FMODBanks
-  TargetBankFolder: 
+  TargetBankFolder: Scripts/FMOD/TapStar/Build
   EventLinkage: 0
   LoggingLevel: 2
   SpeakerModeSettings: []
@@ -574,7 +574,7 @@ MonoBehaviour:
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131848
   HideSetupWizard: 1
-  LastEventReferenceScanVersion: 131625
+  LastEventReferenceScanVersion: 131848
   Platforms:
   - {fileID: -9024092714743988835}
   - {fileID: -8692962460656139057}

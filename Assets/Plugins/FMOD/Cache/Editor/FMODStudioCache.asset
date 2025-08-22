@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3363869086791711215
+--- !u!114 &-6342154361179491013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638914958624665829
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638914801361956541
   FileSizes:
   - Name: Desktop
-    Value: 3434016
+    Value: 826
   Exists: 1
---- !u!114 &-2314522117919530476
+--- !u!114 &-4659829576752928758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,16 +30,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/DIscoTrain
+  m_Name: event:/GetYoHandsUp
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/DIscoTrain
+  Path: event:/GetYoHandsUp
   Guid:
-    Data1: 915851105
-    Data2: 1179306250
-    Data3: -1398813761
-    Data4: -1052582241
+    Data1: -382399345
+    Data2: 1266619743
+    Data3: -1486034505
+    Data4: -176733935
   Banks:
-  - {fileID: -3363869086791711215}
+  - {fileID: 5911785242560693021}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 117185
+--- !u!114 &-3882133505911368923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DiscoTrain
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/DiscoTrain
+  Guid:
+    Data1: 1778674251
+    Data2: 1245249815
+    Data3: 1316740279
+    Data4: 1055550221
+  Banks:
+  - {fileID: 5911785242560693021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -60,51 +87,24 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: 5109195330528685282}
-  - {fileID: -3363869086791711215}
+  - {fileID: -6342154361179491013}
+  - {fileID: 5911785242560693021}
   EditorEvents:
-  - {fileID: 773768132595701420}
-  - {fileID: -2314522117919530476}
+  - {fileID: -3882133505911368923}
+  - {fileID: -4659829576752928758}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3363869086791711215}
+  - {fileID: 5911785242560693021}
   StringsBanks:
-  - {fileID: 5109195330528685282}
+  - {fileID: -6342154361179491013}
   cacheVersion: 131848
-  cacheTime: 638914958624674350
+  cacheTime: 638914801361956541
   SerializableEventsDict:
-  - key: event:/GetYoHandsUp
+  - key: event:/DiscoTrain
     index: 0
-  - key: event:/DIscoTrain
+  - key: event:/GetYoHandsUp
     index: 1
---- !u!114 &773768132595701420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/GetYoHandsUp
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/GetYoHandsUp
-  Guid:
-    Data1: -502637987
-    Data2: 1079655390
-    Data3: 670389134
-    Data4: -1249449217
-  Banks:
-  - {fileID: -3363869086791711215}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 117185
---- !u!114 &5109195330528685282
+--- !u!114 &5911785242560693021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,13 +114,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638914958624674350
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638914801361915038
   FileSizes:
   - Name: Desktop
-    Value: 826
+    Value: 3434016
   Exists: 1
