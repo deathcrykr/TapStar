@@ -20,3 +20,10 @@ TrueTypeFontImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156513
+  packageName: All In 1 Sprite Shader
+  packageVersion: 4.32
+  assetPath: Assets/Plugins/AllIn1SpriteShader/Demo/Fonts/PoetsenOne-Regular.ttf
+  uploadId: 771745

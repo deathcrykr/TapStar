@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8488498285576519799
+--- !u!114 &-6342154361179491013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,42 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: /Users/deathcry/Work/TapStar/FMOD/TapStar/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638914280748833492
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638914801361956541
   FileSizes:
   - Name: Desktop
-    Value: 3433856
+    Value: 826
   Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
-  EditorBanks:
-  - {fileID: 7809824937397180934}
-  - {fileID: -8488498285576519799}
-  EditorEvents:
-  - {fileID: 3726626642156907907}
-  - {fileID: 933062412577461349}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -8488498285576519799}
-  StringsBanks:
-  - {fileID: 7809824937397180934}
-  cacheTime: 638914280748854578
-  cacheVersion: 131632
---- !u!114 &933062412577461349
+--- !u!114 &-4659829576752928758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +39,7 @@ MonoBehaviour:
     Data3: -1486034505
     Data4: -176733935
   Banks:
-  - {fileID: -8488498285576519799}
+  - {fileID: 5911785242560693021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -72,7 +47,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 117185
---- !u!114 &3726626642156907907
+--- !u!114 &-3882133505911368923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +66,7 @@ MonoBehaviour:
     Data3: 1316740279
     Data4: 1055550221
   Banks:
-  - {fileID: -8488498285576519799}
+  - {fileID: 5911785242560693021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -99,7 +74,37 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 132545
---- !u!114 &7809824937397180934
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
+  EditorBanks:
+  - {fileID: -6342154361179491013}
+  - {fileID: 5911785242560693021}
+  EditorEvents:
+  - {fileID: -3882133505911368923}
+  - {fileID: -4659829576752928758}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 5911785242560693021}
+  StringsBanks:
+  - {fileID: -6342154361179491013}
+  cacheVersion: 131848
+  cacheTime: 638914801361956541
+  SerializableEventsDict:
+  - key: event:/DiscoTrain
+    index: 0
+  - key: event:/GetYoHandsUp
+    index: 1
+--- !u!114 &5911785242560693021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,13 +114,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: /Users/deathcry/Work/TapStar/FMOD/TapStar/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638914280748854578
+  Path: Scripts/FMOD/TapStar/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638914801361915038
   FileSizes:
   - Name: Desktop
-    Value: 814
+    Value: 3434016
   Exists: 1
