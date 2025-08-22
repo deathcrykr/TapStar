@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from app.api.endpoints import router
 from app.api.ml_endpoints import router as ml_router
+from app.api.universal_endpoints import router as universal_router
 from app.middleware import AntiCheatMiddleware, SecurityHeadersMiddleware, RequestLoggingMiddleware
 from app.config import settings
 from app.dependencies import get_anti_cheat_engine
@@ -100,6 +101,7 @@ if settings.rate_limiting_enabled:
 # Include API routes
 app.include_router(router, prefix="/api", tags=["anti-cheat"])
 app.include_router(ml_router, prefix="/api/ml", tags=["machine-learning"])
+app.include_router(universal_router, prefix="/api/universal", tags=["universal-anti-cheat"])
 
 @app.get("/", tags=["health"])
 async def root():
