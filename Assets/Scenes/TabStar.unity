@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 523156233}
   - component: {fileID: 523156234}
   m_Layer: 0
-  m_Name: RhythmGameManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
