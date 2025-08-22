@@ -425,19 +425,19 @@ MonoBehaviour:
   m_GameCanvas: {fileID: 1714201609}
   m_MusicEventPath:
     Guid:
-      Data1: 318957492
-      Data2: 1227577276
-      Data3: 1107112866
-      Data4: 669534563
-    Path: event:/GetYoHandsUp
+      Data1: 1778674251
+      Data2: 1245249815
+      Data3: 1316740279
+      Data4: 1055550221
+    Path: event:/DiscoTrain
   m_HitSoundEventPath:
     Guid:
-      Data1: 318957492
-      Data2: 1227577276
-      Data3: 1107112866
-      Data4: 669534563
-    Path: event:/GetYoHandsUp
-  m_MusicFileName: get-yo-hands-up
+      Data1: 1778674251
+      Data2: 1245249815
+      Data3: 1316740279
+      Data4: 1055550221
+    Path: event:/DiscoTrain
+  m_MusicFileName: disco-train
   m_Score: 0
   m_ScoreText: {fileID: 0}
   currentTime: 0
