@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 10191d7060d5d45c0b784a6d3f384287
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Plugins/iOS/ByteBrew.xcprivacy
+  uploadId: 733474

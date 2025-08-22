@@ -16,3 +16,8 @@ python-jose[cryptography]==3.3.0
 python-multipart==0.0.6
 asyncio-redis==0.16.0
 aiosqlite==0.19.0
+
+# TimescaleDB 지원
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+sqlalchemy-timescaledb==0.4.1

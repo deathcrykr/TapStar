@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 39eb4ecdb44764ac78379e00f90f4cd5
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Examples/bytebrewexample.unity
+  uploadId: 733474

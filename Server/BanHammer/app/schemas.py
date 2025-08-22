@@ -13,11 +13,14 @@ class ActionType(str, Enum):
     TRADE = "trade"
 
 class PlayerActionCreate(BaseModel):
-    player_id: str = Field(..., description="Unique player identifier")
-    username: Optional[str] = Field(None, description="Player username")
-    action_type: str = Field(..., description="Type of action performed")
-    value: float = Field(default=0.0, description="Numeric value associated with action")
+    player_id: str = Field(..., min_length=1, max_length=100, regex=r'^[a-zA-Z0-9_-]+$', description="Unique player identifier")
+    username: Optional[str] = Field(None, max_length=50, description="Player username")
+    action_type: str = Field(..., min_length=1, max_length=50, description="Type of action performed")
+    value: float = Field(default=0.0, ge=0.0, le=1000000.0, description="Numeric value associated with action")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional action data")
+    
+    class Config:
+        str_strip_whitespace = True
 
 class ViolationResponse(BaseModel):
     player_id: Optional[str] = None
@@ -33,10 +36,13 @@ class PlayerRiskResponse(BaseModel):
     recent_violations: List[ViolationResponse]
 
 class BanPlayerRequest(BaseModel):
-    reason: str = Field(..., description="Reason for the ban")
-    ban_type: str = Field(default="permanent", description="Type of ban (temporary/permanent)")
-    banned_by: str = Field(..., description="Admin/system that issued the ban")
+    reason: str = Field(..., min_length=5, max_length=500, description="Reason for the ban")
+    ban_type: str = Field(default="permanent", regex=r'^(temporary|permanent)$', description="Type of ban (temporary/permanent)")
+    banned_by: str = Field(..., min_length=1, max_length=50, description="Admin/system that issued the ban")
     unban_timestamp: Optional[datetime] = Field(None, description="When to unban (for temporary bans)")
+    
+    class Config:
+        str_strip_whitespace = True
 
 class PlayerStatsResponse(BaseModel):
     player_id: str

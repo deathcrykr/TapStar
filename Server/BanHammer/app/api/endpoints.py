@@ -28,72 +28,93 @@ async def submit_player_action(
     This endpoint receives game actions and processes them through
     the anti-cheat engine to detect violations.
     """
-    # Create PlayerAction object
-    action = PlayerAction(
-        player_id=action_data.player_id,
-        action_type=action_data.action_type,
-        timestamp=time.time(),
-        value=action_data.value,
-        metadata=action_data.metadata or {}
-    )
-    
-    # Ensure player exists
-    player = db.query(Player).filter(Player.id == action.player_id).first()
-    if not player:
-        player = Player(
-            id=action.player_id,
-            username=action_data.username or action.player_id
+    try:
+        # Validate metadata size to prevent DoS attacks
+        if action_data.metadata and len(str(action_data.metadata)) > 10000:
+            raise HTTPException(status_code=400, detail="Metadata too large")
+        
+        # Create PlayerAction object
+        action = PlayerAction(
+            player_id=action_data.player_id,
+            action_type=action_data.action_type,
+            timestamp=time.time(),
+            value=action_data.value,
+            metadata=action_data.metadata or {}
         )
-        db.add(player)
-        db.commit()
     
-    # Store action in database
-    db_action = DBPlayerAction(
-        player_id=action.player_id,
-        action_type=action.action_type,
-        timestamp=datetime.fromtimestamp(action.timestamp),
-        value=action.value
-    )
-    db_action.set_metadata(action.metadata)
-    db.add(db_action)
-    
-    # Analyze action for violations
-    violations = await anti_cheat.analyze_action(action)
-    
-    # Store violations in database
-    for violation in violations:
-        db_violation = Violation(
-            player_id=violation.player_id,
-            violation_type=violation.violation_type.value,
-            severity=violation.severity,
-            timestamp=datetime.fromtimestamp(violation.timestamp)
+        # Ensure player exists
+        player = db.query(Player).filter(Player.id == action.player_id).first()
+        if not player:
+            player = Player(
+                id=action.player_id,
+                username=action_data.username or action.player_id
+            )
+            db.add(player)
+            try:
+                db.commit()
+            except Exception as e:
+                db.rollback()
+                raise HTTPException(status_code=500, detail="Failed to create player")
+        
+        # Store action in database
+        db_action = DBPlayerAction(
+            player_id=action.player_id,
+            action_type=action.action_type,
+            timestamp=datetime.fromtimestamp(action.timestamp),
+            value=action.value
         )
-        db_violation.set_details(violation.details)
-        db.add(db_violation)
+        db_action.set_metadata(action.metadata)
+        db.add(db_action)
+        
+        # Analyze action for violations
+        violations = await anti_cheat.analyze_action(action)
+        
+        # Store violations in database
+        for violation in violations:
+            db_violation = Violation(
+                player_id=violation.player_id,
+                violation_type=violation.violation_type.value,
+                severity=violation.severity,
+                timestamp=datetime.fromtimestamp(violation.timestamp)
+            )
+            db_violation.set_details(violation.details)
+            db.add(db_violation)
+        
+        # Update player risk score
+        player.risk_score = await anti_cheat.get_player_risk_score(action.player_id)
+        player.last_activity = datetime.now()
+        
+        try:
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            raise HTTPException(status_code=500, detail="Failed to save action data")
+        
+        # Check if player should be banned
+        should_ban, ban_reason = await anti_cheat.should_ban_player(action.player_id)
+        if should_ban and not player.is_banned:
+            background_tasks.add_task(ban_player_task, player.id, ban_reason, db)
+        
+        return {
+            "action_processed": True,
+            "violations_detected": len(violations),
+            "current_risk_score": player.risk_score,
+            "violations": [
+                {
+                    "type": v.violation_type.value,
+                    "severity": v.severity,
+                    "details": v.details
+                } for v in violations
+            ]
+        }
     
-    # Update player risk score
-    player.risk_score = await anti_cheat.get_player_risk_score(action.player_id)
-    player.last_activity = datetime.now()
-    
-    db.commit()
-    
-    # Check if player should be banned
-    should_ban, ban_reason = await anti_cheat.should_ban_player(action.player_id)
-    if should_ban and not player.is_banned:
-        background_tasks.add_task(ban_player_task, player.id, ban_reason, db)
-    
-    return {
-        "action_processed": True,
-        "violations_detected": len(violations),
-        "current_risk_score": player.risk_score,
-        "violations": [
-            {
-                "type": v.violation_type.value,
-                "severity": v.severity,
-                "details": v.details
-            } for v in violations
-        ]
-    }
+    except HTTPException:
+        raise
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error processing action for player {action_data.player_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @router.get("/player/{player_id}/risk", response_model=PlayerRiskResponse)
 async def get_player_risk(

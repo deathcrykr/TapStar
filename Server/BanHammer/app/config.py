@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from pydantic import BaseSettings, Field
 import json
 
@@ -40,6 +40,13 @@ class Settings(BaseSettings):
     # Logging settings
     log_level: str = Field(default="INFO", env="LOG_LEVEL")
     log_requests: bool = Field(default=True, env="LOG_REQUESTS")
+    
+    # CORS settings
+    allowed_origins: List[str] = Field(default=[
+        "http://localhost:3000",
+        "http://localhost:8080", 
+        "https://yourdomain.com"
+    ], env="ALLOWED_ORIGINS")
     
     class Config:
         env_file = ".env"

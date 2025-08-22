@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from app.api.endpoints import router
 from app.api.ml_endpoints import router as ml_router
 from app.api.universal_endpoints import router as universal_router
+from app.api.timescale_endpoints import router as timescale_router
 from app.middleware import AntiCheatMiddleware, SecurityHeadersMiddleware, RequestLoggingMiddleware
 from app.config import settings
 from app.dependencies import get_anti_cheat_engine
@@ -83,10 +84,10 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=settings.allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Authorization", "Content-Type", "X-Player-ID"],
 )
 
 # Add custom middleware
@@ -102,6 +103,7 @@ if settings.rate_limiting_enabled:
 app.include_router(router, prefix="/api", tags=["anti-cheat"])
 app.include_router(ml_router, prefix="/api/ml", tags=["machine-learning"])
 app.include_router(universal_router, prefix="/api/universal", tags=["universal-anti-cheat"])
+app.include_router(timescale_router, prefix="/api/ts", tags=["timescale-anti-cheat"])
 
 @app.get("/", tags=["health"])
 async def root():

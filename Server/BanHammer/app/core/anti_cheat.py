@@ -71,13 +71,24 @@ class AntiCheatEngine:
             "continuous_activity": 3600  # Hours of continuous activity
         }
         
-        # In-memory storage for analysis
+        # In-memory storage for analysis with memory management
         self.player_actions: Dict[str, deque] = defaultdict(lambda: deque(maxlen=1000))
         self.violation_scores: Dict[str, float] = defaultdict(float)
         self.player_stats: Dict[str, Dict] = defaultdict(dict)
+        
+        # Memory management settings - 현실적인 수치로 변경
+        self.max_players_in_memory = 100000  # Maximum players to keep in memory (10만명 = ~7.5GB)
+        self.cleanup_interval = 600  # Cleanup every 10 minutes  
+        self.last_cleanup = time.time()
+        
+        # DB 기반 대용량 처리를 위한 플래그
+        self.use_db_for_analysis = True  # DB에서 히스토리 분석
 
     async def analyze_action(self, action: PlayerAction) -> List[ViolationRecord]:
         violations = []
+        
+        # Check memory usage and cleanup if needed
+        await self._check_memory_usage()
         
         # Store action
         self.player_actions[action.player_id].append(action)
@@ -376,7 +387,57 @@ class AntiCheatEngine:
         
         return False, ""
 
-    async def cleanup_old_data(self):
+    async def _check_memory_usage(self):
+        """Check and manage memory usage to prevent memory leaks."""
+        current_time = time.time()
+        
+        # Check if cleanup is needed
+        if current_time - self.last_cleanup > self.cleanup_interval:
+            await self._cleanup_memory()
+            self.last_cleanup = current_time
+        
+        # Emergency cleanup if too many players in memory
+        if len(self.player_actions) > self.max_players_in_memory:
+            await self._emergency_cleanup()
+    
+    async def _emergency_cleanup(self):
+        """Emergency cleanup when memory usage is too high."""
+        current_time = time.time()
+        players_to_remove = []
+        
+        # Sort players by last activity
+        player_last_activity = {}
+        for player_id, actions in self.player_actions.items():
+            if actions:
+                player_last_activity[player_id] = actions[-1].timestamp
+            else:
+                players_to_remove.append(player_id)
+        
+        # Remove players with no actions first
+        for player_id in players_to_remove:
+            self._remove_player_data(player_id)
+        
+        # If still too many players, remove oldest inactive ones
+        if len(self.player_actions) > self.max_players_in_memory:
+            sorted_players = sorted(player_last_activity.items(), key=lambda x: x[1])
+            excess_count = len(self.player_actions) - self.max_players_in_memory + 1000000  # Remove extra 1 million
+            
+            for player_id, _ in sorted_players[:excess_count]:
+                self._remove_player_data(player_id)
+        
+        logger.warning(f"Emergency cleanup completed. Players in memory: {len(self.player_actions)}")
+    
+    def _remove_player_data(self, player_id: str):
+        """Remove all data for a specific player."""
+        if player_id in self.player_actions:
+            del self.player_actions[player_id]
+        if player_id in self.violation_scores:
+            del self.violation_scores[player_id]
+        if player_id in self.player_stats:
+            del self.player_stats[player_id]
+
+    async def _cleanup_memory(self):
+        """Regular cleanup of old data to manage memory usage."""
         current_time = time.time()
         cutoff_time = current_time - 86400  # 24 hours ago
         
@@ -388,6 +449,10 @@ class AntiCheatEngine:
             
             # Remove player if no recent actions
             if not actions:
-                del self.player_actions[player_id]
-                if player_id in self.violation_scores:
-                    del self.violation_scores[player_id]
+                self._remove_player_data(player_id)
+        
+        logger.info(f"Memory cleanup completed. Players in memory: {len(self.player_actions)}")
+
+    async def cleanup_old_data(self):
+        """Legacy method for compatibility."""
+        await self._cleanup_memory()

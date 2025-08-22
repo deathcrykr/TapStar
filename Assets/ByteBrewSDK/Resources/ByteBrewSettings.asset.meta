@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 03ec3b3a7afce4e83ab20d1899067848
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Resources/ByteBrewSettings.asset
+  uploadId: 733474

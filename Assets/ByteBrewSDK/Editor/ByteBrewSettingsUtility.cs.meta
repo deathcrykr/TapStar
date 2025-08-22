@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4977af46e1fe24d8a8ea8e8b49463b5e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Editor/ByteBrewSettingsUtility.cs
+  uploadId: 733474

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d2b6438a47fc3264b8d468f438c3b9bb
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Editor/ByteBrewDependencies.xml
+  uploadId: 733474

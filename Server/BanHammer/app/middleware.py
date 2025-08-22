@@ -54,11 +54,13 @@ class AntiCheatMiddleware(BaseHTTPMiddleware):
         # Check headers first
         player_id = request.headers.get("X-Player-ID")
         if player_id:
-            return player_id
+            # Validate player ID format
+            if self._is_valid_player_id(player_id):
+                return player_id
         
         # Check query parameters
         player_id = request.query_params.get("player_id")
-        if player_id:
+        if player_id and self._is_valid_player_id(player_id):
             return player_id
         
         # For POST requests, try to extract from body
@@ -72,7 +74,9 @@ class AntiCheatMiddleware(BaseHTTPMiddleware):
                     import json
                     try:
                         data = json.loads(body)
-                        return data.get("player_id")
+                        player_id = data.get("player_id")
+                        if player_id and self._is_valid_player_id(player_id):
+                            return player_id
                     except:
                         pass
             except:
@@ -111,19 +115,64 @@ class AntiCheatMiddleware(BaseHTTPMiddleware):
             return 30  # 30 player queries per minute
         else:
             return 100  # Default limit
+    
+    def _is_valid_player_id(self, player_id: str) -> bool:
+        """Validate player ID format for security."""
+        import re
+        if not player_id or len(player_id) > 100:
+            return False
+        # Only allow alphanumeric characters, underscores, and hyphens
+        return bool(re.match(r'^[a-zA-Z0-9_-]+$', player_id))
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
-    """Add security headers to responses."""
+    """Add comprehensive security headers to responses."""
     
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         response = await call_next(request)
         
-        # Add security headers
+        # Essential security headers
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY" 
         response.headers["X-XSS-Protection"] = "1; mode=block"
-        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"
+        
+        # Content Security Policy - restrictive for API
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'none'; "
+            "script-src 'none'; "
+            "style-src 'none'; "
+            "img-src 'none'; "
+            "connect-src 'self'; "
+            "font-src 'none'; "
+            "object-src 'none'; "
+            "media-src 'none'; "
+            "frame-src 'none'; "
+            "worker-src 'none'; "
+            "manifest-src 'none'"
+        )
+        
+        # Additional security headers
+        response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["Permissions-Policy"] = (
+            "geolocation=(), "
+            "microphone=(), "
+            "camera=(), "
+            "payment=(), "
+            "usb=(), "
+            "magnetometer=(), "
+            "gyroscope=(), "
+            "speaker=()"
+        )
+        
+        # API-specific headers
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, private"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        
+        # Remove server information
+        if "Server" in response.headers:
+            del response.headers["Server"]
         
         return response
 

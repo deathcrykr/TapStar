@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 635f9b1267243490e8e163027f7a508b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/ByteBrewSDKUnityDoc.pdf
+  uploadId: 733474

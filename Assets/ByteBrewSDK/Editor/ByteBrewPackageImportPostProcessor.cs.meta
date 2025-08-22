@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: afadab78f106e46cea8864c1c34eb751
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Editor/ByteBrewPackageImportPostProcessor.cs
+  uploadId: 733474

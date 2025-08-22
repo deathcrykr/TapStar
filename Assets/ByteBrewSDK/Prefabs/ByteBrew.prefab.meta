@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1aefd01200632424cb017cf723f73750
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 197435
+  packageName: ByteBrew SDK
+  packageVersion: 0.1.9
+  assetPath: Assets/ByteBrewSDK/Prefabs/ByteBrew.prefab
+  uploadId: 733474
