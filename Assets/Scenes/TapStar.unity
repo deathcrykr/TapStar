@@ -1104,18 +1104,18 @@ MonoBehaviour:
   m_GameCanvas: {fileID: 1714201609}
   m_MusicEventPath:
     Guid:
-      Data1: 1778674251
-      Data2: 1245249815
-      Data3: 1316740279
-      Data4: 1055550221
-    Path: event:/DiscoTrain
+      Data1: 915851105
+      Data2: 1179306250
+      Data3: -1398813761
+      Data4: -1052582241
+    Path: event:/DIscoTrain
   m_HitSoundEventPath:
     Guid:
-      Data1: 1778674251
-      Data2: 1245249815
-      Data3: 1316740279
-      Data4: 1055550221
-    Path: event:/DiscoTrain
+      Data1: 915851105
+      Data2: 1179306250
+      Data3: -1398813761
+      Data4: -1052582241
+    Path: event:/DIscoTrain
   m_MusicFileName: disco-train
   m_Score: 0
   m_ScoreText: {fileID: 0}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_text: Title
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1759,13 +1759,13 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
-  m_isOrthographic: 0
+  m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &759829724
@@ -1822,7 +1822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1102}
+  m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &871934347
@@ -2258,7 +2258,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1058979636}
   m_FillRect: {fileID: 2087638216}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
