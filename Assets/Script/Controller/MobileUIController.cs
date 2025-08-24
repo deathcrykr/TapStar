@@ -187,7 +187,22 @@ namespace TabStar.Controller
 			{
 				StartButton.onClick.AddListener(() =>
 				{
-					GameManager.Instance?.StartGame();
+					// GameManager 유효성 확인
+					if (GameManager.Instance == null)
+					{
+						Debug.LogWarning("GameManager Instance is null!");
+						return;
+					}
+
+					// 이미 게임이 실행중인지 확인
+					if (GameManager.Instance.IsPlaying)
+					{
+						Debug.Log("🎮 Game is already playing - Start button ignored");
+						return;
+					}
+
+					Debug.Log("🎮 Start button clicked - Starting game...");
+					GameManager.Instance.StartGame();
 					StartButton.gameObject.SetActive(false);
 					if (InstructionText != null)
 						InstructionText.gameObject.SetActive(false);

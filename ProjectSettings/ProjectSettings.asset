@@ -780,7 +780,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     ReservedCFE: DOTWEEN
-    Standalone: DOTWEEN;APP_UI_EDITOR_ONLY
+    Standalone: DOTWEEN;APP_UI_EDITOR_ONLY;USE_ADMOB
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN

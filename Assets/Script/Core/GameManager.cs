@@ -82,8 +82,39 @@ namespace TabStar
 		[SerializeField] private Text m_ScoreText;
 		public Text ScoreText { get => m_ScoreText; set => m_ScoreText = value; }
 
-		public float currentTime = 0f;
+		[Header("Clicker Rewards")]
+		[Tooltip("기본 클릭 보상")]
+		[SerializeField] private int m_BaseClickReward = 10;
+		public int BaseClickReward { get => m_BaseClickReward; set => m_BaseClickReward = value; }
 
+		[Header("Clicker Control")]
+		[Tooltip("클릭 가능 상태 (기본값: true)")]
+		[SerializeField] private bool m_IsClickEnabled = true;
+		public bool IsClickEnabled { get => m_IsClickEnabled; set => m_IsClickEnabled = value; }
+
+		public float currentTime = 0f;
+		public bool IsPlaying => m_IsPlaying;
+
+		// Constants
+		private const float MIN_HIT_SOUND_INTERVAL = 0.1f;
+		private const float NOTE_SPAWN_TIME = 2f;
+		private const float SECTION_SPAWN_TIME = 3f;
+		private const float NOTE_DESTROY_DELAY = 0.3f;
+
+		// Static resources (캐싱으로 메모리 효율 개선)
+		private static Sprite s_LineSprite;
+		private static Sprite s_CircleSprite;
+		private static Sprite s_HorizontalLineSprite;
+		private static readonly Dictionary<string, float> s_TimingMultipliers = new Dictionary<string, float>
+		{
+			{ "PERFECT", 6f },
+			{ "NICE", 4f },
+			{ "GOOD", 3f },
+			{ "BAD", 2f },
+			{ "BASIC", 1f }
+		};
+
+		// Game state
 		private FMOD.Studio.EventInstance m_MusicInstance;
 		private NoteData m_CurrentNoteData;
 		private List<VocalSection> m_CurrentVocalSections = new List<VocalSection>();
@@ -92,11 +123,16 @@ namespace TabStar
 		private int m_NextNoteIndex = 0;
 		private int m_NextSectionIndex = 0;
 		private bool m_IsPlaying = false;
+		private float m_LastHitSoundTime = 0f;
 
-		// Lifecycle Methods
-		/// <summary>
-		/// 싱글톤 인스턴스를 설정합니다.
-		/// </summary>
+		// Cached references (성능 최적화)
+		private MobileUIController m_CachedUIController;
+		private RectTransform m_CenterRectTransform;
+		private float m_CanvasWidth;
+
+		// Input cache (매 프레임 new 방지)
+		private readonly List<LineNoteController> m_NoteControllersCache = new List<LineNoteController>(32);
+
 		private void Awake()
 		{
 			if (Instance == null)
@@ -109,14 +145,8 @@ namespace TabStar
 			}
 		}
 
-		/// <summary>
-		/// 게임 매니저를 초기화합니다.
-		/// </summary>
 		private void Start()
 		{
-			Debug.Log("🎮 GameManager starting...");
-
-			// FMOD 필수 체크
 			if (!CheckFMODAvailability())
 			{
 				Debug.LogError("❌ FMOD is not available! GameManager disabled.");
@@ -124,385 +154,258 @@ namespace TabStar
 				return;
 			}
 
-			// 필수 컴포넌트들 미리 설정
-			SetupRequiredComponents();
-
+			InitializeComponents();
 			LoadMusicAndNotes();
 
-			// 자동 게임 시작 (테스트용)
-			if (m_CurrentNoteData != null && m_CurrentNoteData.Notes.Count > 0)
-			{
-				Debug.Log("🚀 Auto-starting game for testing...");
-				Invoke(nameof(StartGame), 1f); // 1초 후 자동 시작
-			}
-			else
-			{
-				Debug.LogError("❌ Cannot start game - no note data available!");
-				if (m_CurrentNoteData == null) Debug.LogError("   - currentNoteData is null");
-				else Debug.LogError($"   - currentNoteData has {m_CurrentNoteData.Notes.Count} notes");
-			}
+			// 자동 시작은 옵션으로 (필요시 주석 해제)
+			// Invoke(nameof(StartGame), 3f);
 		}
 
-		/// <summary>
-		/// 게임 상태를 업데이트합니다.
-		/// </summary>
 		private void Update()
 		{
-			if (m_IsPlaying)
-			{
-				UpdateGameTime();
-				SpawnNotes();
-				if (m_ShowSectionLines) // 디버그 모드에서만 섹션 라인 표시
-				{
-					SpawnSectionLines();
-				}
-				UpdateNotes();
-				if (m_ShowSectionLines) // 디버그 모드에서만 섹션 라인 업데이트
-				{
-					UpdateSectionLines();
-				}
-				CheckInput();
-			}
+			CheckNoteInput();
 
-			// 새로운 Input System 사용
-			if (Keyboard.current?.spaceKey.wasPressedThisFrame == true && !m_IsPlaying)
+			if (!m_IsPlaying) return;
+
+			UpdateGameTime();
+			SpawnNotes();
+			UpdateNotes();
+
+#if UNITY_EDITOR
+			if (m_ShowSectionLines)
 			{
-				StartGame();
+				SpawnSectionLines();
+				UpdateSectionLines();
 			}
+#endif
 		}
 
-		// Public Methods
 		/// <summary>
-		/// 게임을 시작합니다.
+		/// 게임을 시작합니다
 		/// </summary>
 		public void StartGame()
 		{
-			if (m_CurrentNoteData == null)
+			if (m_IsPlaying)
 			{
-				Debug.LogError("❌ No note data loaded! Check Resources/Music folder.");
+				Debug.LogWarning("⚠️ Game is already playing!");
 				return;
 			}
 
-			// FMOD 음악 재생 (필수)
+			if (m_CurrentNoteData == null)
+			{
+				Debug.LogError("❌ No note data loaded!");
+				return;
+			}
+
 			if (m_MusicEventPath.IsNull)
 			{
-				Debug.LogError("❌ FMOD Event Path is required! Cannot start game.");
+				Debug.LogError("❌ FMOD Event Path is required!");
 				return;
+			}
+
+			// 기존 인스턴스 정리
+			if (m_MusicInstance.isValid())
+			{
+				m_MusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+				m_MusicInstance.release();
 			}
 
 			try
 			{
 				m_MusicInstance = RuntimeManager.CreateInstance(m_MusicEventPath);
 				m_MusicInstance.start();
-				Debug.Log($"🎵 Started FMOD music: {m_MusicEventPath}");
 			}
 			catch (System.Exception e)
 			{
 				Debug.LogError($"❌ Failed to start FMOD music: {e.Message}");
-				Debug.LogError("❌ Game cannot start without FMOD working properly.");
 				return;
 			}
 
+			ResetGameState();
 			m_IsPlaying = true;
-			currentTime = 0f;
-			m_NextNoteIndex = 0;
-			m_NextSectionIndex = 0;
-			m_Score = 0;
-
-			Debug.Log($"✅ Rhythm game started! Notes: {m_CurrentNoteData.Notes.Count}, Vocal sections: {m_CurrentVocalSections.Count}");
 		}
 
 		/// <summary>
-		/// 게임을 정지합니다.
+		/// 게임을 정지합니다
 		/// </summary>
 		public void StopGame()
 		{
 			m_IsPlaying = false;
 
-			// FMOD 음악 정지
 			if (m_MusicInstance.isValid())
 			{
 				m_MusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 				m_MusicInstance.release();
-				Debug.Log("Stopped FMOD music");
 			}
 
-			ClearAllNotes();
-			ClearAllSectionLines();
+			ClearAllGameObjects();
 
-			// UI에 게임 종료 알림
-			MobileUIController ui = FindFirstObjectByType<MobileUIController>();
-			if (ui != null)
-			{
-				ui.ShowGameOver(m_Score);
-			}
-
-			Debug.Log($"Game ended! Final Score: {m_Score}");
+			m_CachedUIController?.ShowGameOver(m_Score);
 		}
 
 		/// <summary>
-		/// 현재 점수를 반환합니다.
+		/// 난이도 레벨을 설정합니다
 		/// </summary>
-		/// <returns>현재 점수</returns>
-		public int GetCurrentScore() => m_Score;
-
-		/// <summary>
-		/// 난이도 레벨을 설정합니다.
-		/// </summary>
-		/// <param name="level">난이도 레벨 (1-3)</param>
 		public void SetDifficultyLevel(int level)
 		{
 			if (level < 1 || level > 3)
 			{
-				Debug.LogWarning($"❌ Invalid difficulty level: {level}. Must be 1-3.");
+				Debug.LogWarning($"❌ Invalid difficulty level: {level}");
 				return;
 			}
 
 			m_DifficultyLevel = level;
-			Debug.Log($"🎯 Difficulty level set to: {level} ({GetDifficultyName(level)})");
 
-			// 게임이 진행 중이 아니면 노트 데이터 다시 로드
 			if (!m_IsPlaying)
 			{
 				LoadMusicAndNotes();
 			}
 		}
 
-		/// <summary>
-		/// 난이도 레벨 이름을 반환합니다.
-		/// </summary>
-		/// <param name="level">난이도 레벨</param>
-		/// <returns>난이도 이름</returns>
-		public string GetDifficultyName(int level)
-		{
-			switch (level)
-			{
-				case 1: return "Easy";
-				case 2: return "Medium";
-				case 3: return "Hard";
-				default: return "Unknown";
-			}
-		}
+		public void SetAudioLatencyOffset(float offsetSeconds) => m_AudioLatencyOffset = offsetSeconds;
+		public void EnableClicking() => IsClickEnabled = true;
+		public void DisableClicking() => IsClickEnabled = false;
+		public void ToggleClicking() => IsClickEnabled = !IsClickEnabled;
 
-		/// <summary>
-		/// 현재 난이도 레벨을 반환합니다.
-		/// </summary>
-		/// <returns>현재 난이도 레벨</returns>
-		public int GetDifficultyLevel() => m_DifficultyLevel;
-
-		/// <summary>
-		/// 오디오 지연 보정값을 설정합니다.
-		/// </summary>
-		/// <param name="offsetSeconds">보정값 (초 단위)</param>
-		public void SetAudioLatencyOffset(float offsetSeconds)
-		{
-			m_AudioLatencyOffset = offsetSeconds;
-			Debug.Log($"🎚️ Audio latency offset set to: {offsetSeconds * 1000:F1}ms");
-		}
-
-		/// <summary>
-		/// 현재 오디오 지연 보정값을 반환합니다.
-		/// </summary>
-		/// <returns>오디오 지연 보정값</returns>
-		public float GetAudioLatencyOffset() => m_AudioLatencyOffset;
-
-		/// <summary>
-		/// 캘리브레이션 모드를 시작합니다.
-		/// </summary>
-		public void StartCalibrationMode()
-		{
-			Debug.Log("🎚️ Starting calibration mode - adjust offset until audio feels in sync");
-			// 캘리브레이션 UI나 테스트 패턴 시작 가능
-		}
-
-		// Private Methods
-		/// <summary>
-		/// FMOD 사용 가능성을 확인합니다.
-		/// </summary>
-		/// <returns>FMOD 사용 가능 여부</returns>
 		private bool CheckFMODAvailability()
 		{
 			try
 			{
-				// FMOD Studio 시스템이 초기화되었는지 확인
 				if (!RuntimeManager.HasBankLoaded("Master"))
 				{
 					Debug.LogError("❌ FMOD Master Bank not loaded!");
-					Debug.LogError("💡 Make sure FMOD is properly configured and banks are built.");
 					return false;
 				}
 
 				if (m_MusicEventPath.IsNull)
 				{
-					Debug.LogError("❌ FMOD Event Path is not set in Inspector!");
-					Debug.LogError("💡 Please assign a valid FMOD event to 'Music Event Path'.");
+					Debug.LogError("❌ FMOD Event Path is not set!");
 					return false;
 				}
 
-				Debug.Log("✅ FMOD is available and ready.");
 				return true;
 			}
 			catch (System.Exception e)
 			{
-				Debug.LogError($"❌ FMOD availability check failed: {e.Message}");
+				Debug.LogError($"❌ FMOD check failed: {e.Message}");
 				return false;
 			}
 		}
 
-		/// <summary>
-		/// 필수 컴포넌트들을 설정합니다.
-		/// </summary>
-		private void SetupRequiredComponents()
+		private void InitializeComponents()
 		{
-			// NotePrefab 미리 생성
-			if (m_NotePrefab == null)
-			{
-				Debug.Log("🔧 Creating default note prefab...");
-				CreateDefaultNotePrefab();
-			}
+			// UI Controller 캐싱
+			m_CachedUIController = FindFirstObjectByType<MobileUIController>();
 
-			// Canvas 미리 찾기
+			// Canvas 설정 및 캐싱
 			if (m_GameCanvas == null)
 			{
 				m_GameCanvas = FindFirstObjectByType<Canvas>();
-				if (m_GameCanvas == null)
-				{
-					Debug.LogError("❌ No Canvas found in scene!");
-				}
-				else
-				{
-					Debug.Log("✅ Canvas found and assigned");
-				}
 			}
 
-			// CenterTarget 미리 설정
+			if (m_GameCanvas != null)
+			{
+				m_CanvasWidth = m_GameCanvas.GetComponent<RectTransform>().rect.width;
+			}
+
+			// CenterTarget 설정 및 캐싱
 			if (m_CenterTarget == null)
 			{
-				var go = new GameObject("CenterTarget");
-				go.transform.SetParent(m_GameCanvas.transform);
-				m_CenterTarget = go.transform;
-				var rectTransform = go.AddComponent<RectTransform>();
-				rectTransform.anchoredPosition = Vector2.zero;
-				rectTransform.sizeDelta = new Vector2(100, 100); // 노트 타겟 크기와 맞춤
-
-				var image = go.AddComponent<Image>();
-				image.color = new Color(1f, 0.5f, 0f, 0.9f); // 주황색으로 명확한 타이밍 표시
-				image.sprite = CreateDefaultCircleSprite();
-
-				// 중앙 타겟 펄스 효과로 타이밍 강조
-				image.transform.DOScale(1.1f, 0.8f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
-
-				Debug.Log("✅ CenterTarget created and positioned");
-			}
-		}
-
-		/// <summary>
-		/// 음악과 노트 데이터를 로드합니다.
-		/// </summary>
-		private void LoadMusicAndNotes()
-		{
-			// Resources 폴더에서 JSON 파일 로드
-			string resourcePath = "Music/" + m_MusicFileName;
-			Debug.Log($"🔍 Trying to load: {resourcePath}");
-
-			TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
-
-			if (jsonAsset != null)
-			{
-				Debug.Log($"✅ JSON file loaded successfully: {jsonAsset.name}");
-				try
-				{
-					var fullData = JsonUtility.FromJson<FullNoteDataWithSections>(jsonAsset.text);
-
-					// 난이도에 따른 노트 필터링
-					var filteredNotes = FilterNotesByDifficulty(fullData.Notes, m_DifficultyLevel);
-					m_CurrentNoteData = new NoteData { Notes = filteredNotes };
-
-					// 보컬 구역 정보 로드
-					m_CurrentVocalSections = fullData.VocalSections ?? new List<VocalSection>();
-
-					Debug.Log($"✅ Loaded {fullData.Notes.Count} total notes, filtered to {m_CurrentNoteData.Notes.Count} for difficulty level {m_DifficultyLevel}");
-					Debug.Log($"✅ Loaded {m_CurrentVocalSections.Count} vocal sections");
-				}
-				catch (System.Exception e)
-				{
-					Debug.LogError($"❌ Failed to parse JSON: {e.Message}");
-				}
+				CreateCenterTarget();
 			}
 			else
 			{
-				Debug.LogError($"❌ Note file not found: Resources/{resourcePath}");
-				Debug.LogError($"❌ Make sure disco-train.json exists in Assets/Resources/Music/");
-
-				// 모든 Resources/Music 파일 목록 출력
-				TextAsset[] allAssets = Resources.LoadAll<TextAsset>("Music");
-				Debug.Log($"📁 Found {allAssets.Length} files in Resources/Music:");
-				foreach (var asset in allAssets)
-				{
-					Debug.Log($"   - {asset.name}");
-				}
+				m_CenterRectTransform = m_CenterTarget.GetComponent<RectTransform>();
 			}
 
-			// FMOD 이벤트 경로 필수 확인
-			if (m_MusicEventPath.IsNull)
+			// NotePrefab 설정
+			if (m_NotePrefab == null)
 			{
-				Debug.LogError("❌ FMOD Event Path is required! Game cannot start without FMOD.");
-				Debug.LogError("💡 Please set 'Music Event Path' in Inspector and configure FMOD properly.");
-				enabled = false; // 컴포넌트 비활성화
+				CreateDefaultNotePrefab();
+			}
+
+#if UNITY_EDITOR
+			if (m_SectionLinePrefab == null)
+			{
+				CreateDefaultSectionLinePrefab();
+			}
+#endif
+		}
+
+		private void CreateCenterTarget()
+		{
+			var go = new GameObject("CenterTarget");
+			go.transform.SetParent(m_GameCanvas.transform);
+			m_CenterTarget = go.transform;
+
+			m_CenterRectTransform = go.AddComponent<RectTransform>();
+			m_CenterRectTransform.anchoredPosition = Vector2.zero;
+			m_CenterRectTransform.sizeDelta = new Vector2(100, 100);
+
+			var image = go.AddComponent<Image>();
+			image.color = new Color(1f, 0.5f, 0f, 0.9f);
+			image.sprite = GetOrCreateCircleSprite();
+
+			// 펄스 효과
+			image.transform.DOScale(1.1f, 0.8f)
+				.SetLoops(-1, LoopType.Yoyo)
+				.SetEase(Ease.InOutSine);
+		}
+
+		private void LoadMusicAndNotes()
+		{
+			string resourcePath = $"Music/{m_MusicFileName}";
+			TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
+
+			if (jsonAsset == null)
+			{
+				Debug.LogError($"❌ Note file not found: Resources/{resourcePath}");
 				return;
+			}
+
+			try
+			{
+				var fullData = JsonUtility.FromJson<FullNoteDataWithSections>(jsonAsset.text);
+				var filteredNotes = FilterNotesByDifficulty(fullData.Notes, m_DifficultyLevel);
+				m_CurrentNoteData = new NoteData { Notes = filteredNotes };
+				m_CurrentVocalSections = fullData.VocalSections ?? new List<VocalSection>();
+			}
+			catch (System.Exception e)
+			{
+				Debug.LogError($"❌ Failed to parse JSON: {e.Message}");
 			}
 		}
 
-		/// <summary>
-		/// 난이도에 따라 노트를 필터링합니다.
-		/// </summary>
-		/// <param name="allNotes">전체 노트 목록</param>
-		/// <param name="maxLevel">최대 레벨</param>
-		/// <returns>필터링된 노트 목록</returns>
 		private List<Note> FilterNotesByDifficulty(List<Note> allNotes, int maxLevel)
 		{
 			if (allNotes == null) return new List<Note>();
 
-			var filteredNotes = new List<Note>();
-
+			var filtered = new List<Note>(allNotes.Count);
 			foreach (var note in allNotes)
 			{
-				int noteLevel = note.Level > 0 ? note.Level : 1;
-
-				if (noteLevel <= maxLevel)
+				int level = note.Level > 0 ? note.Level : 1;
+				if (level <= maxLevel)
 				{
-					filteredNotes.Add(note);
+					filtered.Add(note);
 				}
 			}
-
-			Debug.Log($"🎯 Difficulty filtering: {allNotes.Count} → {filteredNotes.Count} notes (max level: {maxLevel})");
-			return filteredNotes;
+			return filtered;
 		}
 
-		/// <summary>
-		/// 게임을 리셋합니다.
-		/// </summary>
-		private void ResetGame()
+		private void ResetGameState()
 		{
 			m_Score = 0;
 			currentTime = 0f;
 			m_NextNoteIndex = 0;
 			m_NextSectionIndex = 0;
-			m_IsPlaying = false;
-
-			ClearAllNotes();
-			ClearAllSectionLines();
+			ClearAllGameObjects();
 		}
 
-		/// <summary>
-		/// 게임 시간을 업데이트합니다.
-		/// </summary>
 		private void UpdateGameTime()
 		{
-			// FMOD 타임라인만 사용 (필수)
 			if (!m_MusicInstance.isValid())
 			{
-				Debug.LogError("❌ FMOD music instance is invalid! Stopping game.");
+				Debug.LogError("❌ FMOD music instance is invalid!");
 				StopGame();
 				return;
 			}
@@ -511,86 +414,45 @@ namespace TabStar
 
 			if (playbackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
-				// FMOD의 실제 재생 위치를 밀리초로 가져와서 초로 변환
 				m_MusicInstance.getTimelinePosition(out int position);
-				float rawTime = position / 1000f; // 밀리초를 초로 변환
-
-				// 오디오 지연 보정 적용
-				currentTime = rawTime + m_AudioLatencyOffset;
+				currentTime = (position / 1000f) + m_AudioLatencyOffset;
 			}
 			else if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED && currentTime > 2f)
 			{
-				Debug.Log("🎵 FMOD music finished, stopping game.");
 				StopGame();
-			}
-			else if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPING)
-			{
-				// 음악이 끝나가고 있음
-				m_MusicInstance.getTimelinePosition(out int position);
-				float rawTime = position / 1000f;
-				currentTime = rawTime + m_AudioLatencyOffset;
 			}
 		}
 
-		/// <summary>
-		/// 노트를 스폰합니다.
-		/// </summary>
 		private void SpawnNotes()
 		{
-			if (m_CurrentNoteData == null || m_CurrentNoteData.Notes == null)
-			{
-				Debug.LogError("❌ Cannot spawn notes - no note data!");
-				return;
-			}
-
-			float spawnTime = 2f; // 2초 전에 스폰
+			if (m_CurrentNoteData?.Notes == null) return;
 
 			while (m_NextNoteIndex < m_CurrentNoteData.Notes.Count)
 			{
 				Note note = m_CurrentNoteData.Notes[m_NextNoteIndex];
 
-				if (note.TimeSeconds - currentTime <= spawnTime)
-				{
-					Debug.Log($"🎯 Attempting to spawn note {m_NextNoteIndex} at time {note.TimeSeconds}s");
-					SpawnNote(note);
-					m_NextNoteIndex++;
-				}
-				else
-				{
-					break;
-				}
+				if (note.TimeSeconds - currentTime > NOTE_SPAWN_TIME) break;
+
+				SpawnNote(note);
+				m_NextNoteIndex++;
 			}
 		}
 
-		/// <summary>
-		/// 단일 노트를 스폰합니다.
-		/// </summary>
-		/// <param name="note">스폰할 노트</param>
 		private void SpawnNote(Note note)
 		{
-			// 필수 컴포넌트 확인
-			if (m_NotePrefab == null || m_GameCanvas == null || m_CenterTarget == null)
-			{
-				Debug.LogError("❌ Required components not set up! Skipping note spawn.");
-				return;
-			}
+			if (m_NotePrefab == null || m_GameCanvas == null || m_CenterTarget == null) return;
 
 			GameObject noteObj = Instantiate(m_NotePrefab, m_GameCanvas.transform);
+			var controller = noteObj.GetComponent<LineNoteController>() ??
+							noteObj.AddComponent<LineNoteController>();
 
-			// 세로 라인 노트 설정
-			var controller = noteObj.GetComponent<LineNoteController>() ?? noteObj.AddComponent<LineNoteController>();
 			controller.Initialize(note, this, m_GameCanvas, m_CenterTarget);
-
 			m_ActiveNotes.Add(noteObj);
-
-			Debug.Log($"📝 Spawned note at time: {note.TimeSeconds}s, intensity: {note.Intensity}");
 		}
 
-		/// <summary>
-		/// 노트들을 업데이트합니다.
-		/// </summary>
 		private void UpdateNotes()
 		{
+			// 역순으로 순회하며 제거 (RemoveAt 효율성)
 			for (int i = m_ActiveNotes.Count - 1; i >= 0; i--)
 			{
 				var noteObj = m_ActiveNotes[i];
@@ -600,8 +462,9 @@ namespace TabStar
 					continue;
 				}
 
+				// GetComponent 최소화 - 필요한 경우만
 				var controller = noteObj.GetComponent<LineNoteController>();
-				if (controller?.IsExpired() == true)
+				if (controller != null && controller.IsExpired())
 				{
 					m_ActiveNotes.RemoveAt(i);
 					Destroy(noteObj);
@@ -609,21 +472,15 @@ namespace TabStar
 			}
 		}
 
-		/// <summary>
-		/// 입력을 확인합니다.
-		/// </summary>
-		private void CheckInput()
+		private void CheckNoteInput()
 		{
-			bool inputPressed = false;
-			float inputTime = currentTime;
+			if (!m_IsClickEnabled) return;
 
-			if (Mouse.current?.leftButton.wasPressedThisFrame == true)
-				inputPressed = true;
+			bool inputPressed = Keyboard.current?.spaceKey.wasPressedThisFrame == true ||
+							   Mouse.current?.leftButton.wasPressedThisFrame == true;
 
-			if (Keyboard.current?.spaceKey.wasPressedThisFrame == true)
-				inputPressed = true;
-
-			if (Touchscreen.current != null)
+			// 터치 입력 체크
+			if (!inputPressed && Touchscreen.current != null)
 			{
 				foreach (var touch in Touchscreen.current.touches)
 				{
@@ -637,152 +494,218 @@ namespace TabStar
 
 			if (inputPressed)
 			{
-				CheckNoteHit(inputTime);
+				ProcessClickerInput();
 			}
 		}
 
-		/// <summary>
-		/// 노트 히트를 확인합니다.
-		/// </summary>
-		/// <param name="inputTime">입력 시간</param>
-		private void CheckNoteHit(float inputTime)
+		private void ProcessClickerInput()
 		{
-			LineNoteController closestNote = null;
-			float closestTimeDiff = float.MaxValue;
+			float multiplier = s_TimingMultipliers["BASIC"];
+			string bonusType = "BASIC";
 
-			foreach (GameObject noteObj in m_ActiveNotes)
+			// 음악 재생 중이고 노트가 있을 때만 타이밍 체크
+			if (m_IsPlaying && m_ActiveNotes.Count > 0)
 			{
-				LineNoteController controller = noteObj.GetComponent<LineNoteController>();
-				if (controller != null)
-				{
-					float timeDiff = controller.GetTimeDifference(inputTime);
+				// 캐시 리스트 재사용
+				m_NoteControllersCache.Clear();
 
-					if (Mathf.Abs(timeDiff) < m_HitWindow && Mathf.Abs(timeDiff) < closestTimeDiff)
+				// 유효한 컨트롤러만 수집
+				foreach (var noteObj in m_ActiveNotes)
+				{
+					if (noteObj != null)
+					{
+						var controller = noteObj.GetComponent<LineNoteController>();
+						if (controller != null)
+						{
+							m_NoteControllersCache.Add(controller);
+						}
+					}
+				}
+
+				// 가장 가까운 노트 찾기
+				LineNoteController closestNote = null;
+				float closestTimeDiff = float.MaxValue;
+
+				foreach (var controller in m_NoteControllersCache)
+				{
+					float timeDiff = controller.GetTimeDifference(currentTime);
+					float absTimeDiff = Mathf.Abs(timeDiff);
+
+					if (absTimeDiff < closestTimeDiff)
 					{
 						closestNote = controller;
-						closestTimeDiff = Mathf.Abs(timeDiff);
+						closestTimeDiff = absTimeDiff;
 					}
+				}
+
+				// 히트 윈도우 내에 있으면 보너스
+				if (closestNote != null && closestTimeDiff <= m_HitWindow)
+				{
+					bonusType = GetTimingBonus(closestTimeDiff);
+					multiplier = s_TimingMultipliers[bonusType];
+
+					// 노트 제거
+					GameObject noteToRemove = closestNote.gameObject;
+					m_ActiveNotes.Remove(noteToRemove);
+
+					// 시각적 효과
+					ApplyHitVisualEffect(closestNote);
+					Destroy(noteToRemove, NOTE_DESTROY_DELAY);
 				}
 			}
 
-			if (closestNote != null)
+			// 점수 계산 및 업데이트
+			int finalReward = Mathf.RoundToInt(m_BaseClickReward * multiplier);
+			m_Score += finalReward;
+
+			ShowClickerFeedback(bonusType, finalReward);
+			UpdateScoreDisplay();
+		}
+
+		private string GetTimingBonus(float timeDiff)
+		{
+			if (timeDiff <= 0.015f) return "PERFECT";
+			if (timeDiff <= 0.030f) return "NICE";
+			if (timeDiff <= 0.050f) return "GOOD";
+			return "BAD";
+		}
+
+		private void ApplyHitVisualEffect(LineNoteController note)
+		{
+			note.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
+			var image = note.GetComponent<Image>();
+			if (image != null)
 			{
-				string accuracy = GetAccuracyGrade(closestTimeDiff);
-				OnNoteHit(closestNote, accuracy, closestTimeDiff);
-				m_ActiveNotes.Remove(closestNote.gameObject);
-				Destroy(closestNote.gameObject);
+				image.DOFade(0f, 0.2f);
 			}
 		}
 
-		/// <summary>
-		/// 정확도 등급을 계산합니다.
-		/// </summary>
-		/// <param name="timeDiff">시간 차이</param>
-		/// <returns>정확도 등급</returns>
-		private string GetAccuracyGrade(float timeDiff)
+		private void ShowClickerFeedback(string bonusType, int reward)
 		{
-			if (timeDiff <= 0.015f) return "PERFECT";
-			if (timeDiff <= 0.030f) return "GREAT";
-			if (timeDiff <= 0.050f) return "GOOD";
-			return "OK";
-		}
-
-		/// <summary>
-		/// 노트 히트 처리를 합니다.
-		/// </summary>
-		/// <param name="note">히트된 노트</param>
-		/// <param name="accuracy">정확도</param>
-		/// <param name="timeDiff">시간 차이</param>
-		private void OnNoteHit(LineNoteController note, string accuracy, float timeDiff)
-		{
-			int baseScore = accuracy switch
-			{
-				"PERFECT" => 300,
-				"GREAT" => 200,
-				"GOOD" => 100,
-				"OK" => 50,
-				_ => 0
-			};
-
-			m_Score += baseScore;
-
-			Debug.Log($"🎯 Hit! Accuracy: {accuracy} ({timeDiff * 1000:F1}ms), Score: +{baseScore}");
-
+			// 중앙 타겟 효과
 			if (m_CenterTarget != null)
 			{
 				m_CenterTarget.DOKill();
-				m_CenterTarget.DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f);
+
+				float scale = bonusType switch
+				{
+					"PERFECT" => 0.4f,
+					"NICE" => 0.3f,
+					"GOOD" => 0.25f,
+					"BAD" => 0.2f,
+					_ => 0.15f
+				};
+
+				m_CenterTarget.DOPunchScale(Vector3.one * scale, 0.3f, 5, 0.5f);
 			}
 
-			note.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
-			note.GetComponent<Image>().DOFade(0f, 0.2f);
-
-			if (!m_HitSoundEventPath.IsNull)
+			// 히트 사운드 (중복 방지)
+			if (!m_HitSoundEventPath.IsNull && bonusType != "BASIC")
 			{
-				RuntimeManager.PlayOneShot(m_HitSoundEventPath);
+				float currentTime = Time.time;
+				if (currentTime - m_LastHitSoundTime >= MIN_HIT_SOUND_INTERVAL)
+				{
+					RuntimeManager.PlayOneShot(m_HitSoundEventPath);
+					m_LastHitSoundTime = currentTime;
+				}
 			}
+		}
 
-			MobileUIController ui = FindFirstObjectByType<MobileUIController>();
-			if (ui != null)
-			{
-				ui.UpdateScore(m_Score);
-			}
+		private void UpdateScoreDisplay()
+		{
+			m_CachedUIController?.UpdateScore(m_Score);
 
 			if (m_ScoreText != null)
 			{
-				m_ScoreText.text = "Score: " + m_Score;
+				m_ScoreText.text = $"Score: {m_Score}";
 				m_ScoreText.transform.DOKill();
 				m_ScoreText.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 3, 0.3f);
 			}
-
-			Debug.Log($"Hit! Score: {m_Score}");
 		}
 
-		/// <summary>
-		/// 모든 노트를 제거합니다.
-		/// </summary>
-		private void ClearAllNotes()
+		private void ClearAllGameObjects()
 		{
-			foreach (GameObject noteObj in m_ActiveNotes)
+			// 노트 정리
+			foreach (var noteObj in m_ActiveNotes)
 			{
 				if (noteObj != null)
+				{
+					noteObj.transform.DOKill();
 					Destroy(noteObj);
+				}
 			}
 			m_ActiveNotes.Clear();
-		}
 
-		/// <summary>
-		/// 모든 섹션 라인을 제거합니다.
-		/// </summary>
-		private void ClearAllSectionLines()
-		{
-			foreach (GameObject sectionLineObj in m_ActiveSectionLines)
+#if UNITY_EDITOR
+			// 섹션 라인 정리
+			foreach (var lineObj in m_ActiveSectionLines)
 			{
-				if (sectionLineObj != null)
-					Destroy(sectionLineObj);
+				if (lineObj != null)
+				{
+					lineObj.transform.DOKill();
+					Destroy(lineObj);
+				}
 			}
 			m_ActiveSectionLines.Clear();
+#endif
 		}
 
-		/// <summary>
-		/// 기본 노트 프리팹을 생성합니다.
-		/// </summary>
+		// 스프라이트 생성 메서드들 (static 캐싱)
 		private void CreateDefaultNotePrefab()
 		{
 			m_NotePrefab = new GameObject("DefaultLineNote");
 			var image = m_NotePrefab.AddComponent<Image>();
 			var rectTransform = m_NotePrefab.GetComponent<RectTransform>();
 
-			image.sprite = CreateDefaultLineSprite();
+			image.sprite = GetOrCreateLineSprite();
 			image.color = Color.cyan;
 			rectTransform.sizeDelta = new Vector2(8, 200);
-
-			Debug.Log("✅ Created default line note prefab");
 		}
 
-		/// <summary>
-		/// 기본 섹션 라인 프리팹을 생성합니다.
-		/// </summary>
+		private static Sprite GetOrCreateLineSprite()
+		{
+			if (s_LineSprite != null) return s_LineSprite;
+
+			const int WIDTH = 8, HEIGHT = 64;
+			var texture = new Texture2D(WIDTH, HEIGHT);
+			var colors = new Color[WIDTH * HEIGHT];
+
+			for (int i = 0; i < colors.Length; i++)
+				colors[i] = Color.white;
+
+			texture.SetPixels(colors);
+			texture.Apply();
+
+			s_LineSprite = Sprite.Create(texture, new Rect(0, 0, WIDTH, HEIGHT), new Vector2(0.5f, 0.5f));
+			return s_LineSprite;
+		}
+
+		private static Sprite GetOrCreateCircleSprite()
+		{
+			if (s_CircleSprite != null) return s_CircleSprite;
+
+			const int SIZE = 64;
+			var texture = new Texture2D(SIZE, SIZE);
+			var center = new Vector2(32, 32);
+			var colors = new Color[SIZE * SIZE];
+
+			for (int i = 0; i < colors.Length; i++)
+			{
+				int x = i % SIZE;
+				int y = i / SIZE;
+				float distance = Vector2.Distance(new Vector2(x, y), center);
+				colors[i] = (distance <= 30 && distance >= 25) ? Color.white : Color.clear;
+			}
+
+			texture.SetPixels(colors);
+			texture.Apply();
+
+			s_CircleSprite = Sprite.Create(texture, new Rect(0, 0, SIZE, SIZE), new Vector2(0.5f, 0.5f));
+			return s_CircleSprite;
+		}
+
+#if UNITY_EDITOR
+		// 디버그용 섹션 라인 메서드들
 		private void CreateDefaultSectionLinePrefab()
 		{
 			m_SectionLinePrefab = new GameObject("DefaultSectionLine");
@@ -790,161 +713,73 @@ namespace TabStar
 			var rectTransform = m_SectionLinePrefab.GetComponent<RectTransform>();
 
 			image.color = new Color(1f, 1f, 1f, 0.5f);
-			image.sprite = CreateDefaultHorizontalLineSprite();
+			image.sprite = GetOrCreateHorizontalLineSprite();
 			rectTransform.sizeDelta = new Vector2(1200, 1);
-
-			Debug.Log("✅ Created default section line prefab");
 		}
 
-		/// <summary>
-		/// 기본 라인 스프라이트를 생성합니다.
-		/// </summary>
-		/// <returns>라인 스프라이트</returns>
-		private static Sprite CreateDefaultLineSprite()
+		private static Sprite GetOrCreateHorizontalLineSprite()
 		{
-			const int WIDTH = 8;
-			const int HEIGHT = 64;
+			if (s_HorizontalLineSprite != null) return s_HorizontalLineSprite;
 
+			const int WIDTH = 64, HEIGHT = 1;
 			var texture = new Texture2D(WIDTH, HEIGHT);
 			var colors = new Color[WIDTH * HEIGHT];
 
 			for (int i = 0; i < colors.Length; i++)
-			{
 				colors[i] = Color.white;
-			}
 
 			texture.SetPixels(colors);
 			texture.Apply();
 
-			return Sprite.Create(texture, new Rect(0, 0, WIDTH, HEIGHT), new Vector2(0.5f, 0.5f));
+			s_HorizontalLineSprite = Sprite.Create(texture, new Rect(0, 0, WIDTH, HEIGHT), new Vector2(0.5f, 0.5f));
+			return s_HorizontalLineSprite;
 		}
 
-		/// <summary>
-		/// 기본 가로 라인 스프라이트를 생성합니다.
-		/// </summary>
-		/// <returns>가로 라인 스프라이트</returns>
-		private static Sprite CreateDefaultHorizontalLineSprite()
-		{
-			const int WIDTH = 64;
-			const int HEIGHT = 1;
-
-			var texture = new Texture2D(WIDTH, HEIGHT);
-			var colors = new Color[WIDTH * HEIGHT];
-
-			for (int i = 0; i < colors.Length; i++)
-			{
-				colors[i] = Color.white;
-			}
-
-			texture.SetPixels(colors);
-			texture.Apply();
-
-			return Sprite.Create(texture, new Rect(0, 0, WIDTH, HEIGHT), new Vector2(0.5f, 0.5f));
-		}
-
-		/// <summary>
-		/// 기본 원형 스프라이트를 생성합니다.
-		/// </summary>
-		/// <returns>원형 스프라이트</returns>
-		private static Sprite CreateDefaultCircleSprite()
-		{
-			var texture = new Texture2D(64, 64);
-			var center = new Vector2(32, 32);
-			var colors = new Color[64 * 64];
-
-			for (int i = 0; i < colors.Length; i++)
-			{
-				int x = i % 64;
-				int y = i / 64;
-				float distance = Vector2.Distance(new Vector2(x, y), center);
-
-				colors[i] = (distance <= 30 && distance >= 25) ? Color.white : Color.clear;
-			}
-
-			texture.SetPixels(colors);
-			texture.Apply();
-
-			return Sprite.Create(texture, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f));
-		}
-
-#if UNITY_EDITOR
-		/// <summary>
-		/// 섹션 라인을 스폰합니다.
-		/// </summary>
 		private void SpawnSectionLines()
 		{
-			if (m_CurrentVocalSections == null || m_CurrentVocalSections.Count == 0)
-			{
-				return;
-			}
-
-			float spawnTime = 3f; // 3초 전에 스폰
+			if (m_CurrentVocalSections == null || m_CurrentVocalSections.Count == 0) return;
 
 			while (m_NextSectionIndex < m_CurrentVocalSections.Count)
 			{
-				VocalSection section = m_CurrentVocalSections[m_NextSectionIndex];
+				var section = m_CurrentVocalSections[m_NextSectionIndex];
 
-				if (section.StartTime - currentTime <= spawnTime)
-				{
-					Debug.Log($"🎤 Attempting to spawn section line: {section.Type} at {section.StartTime}s");
-					SpawnSectionLine(section);
-					m_NextSectionIndex++;
-				}
-				else
-				{
-					break;
-				}
+				if (section.StartTime - currentTime > SECTION_SPAWN_TIME) break;
+
+				SpawnSectionLine(section);
+				m_NextSectionIndex++;
 			}
 		}
 
-		/// <summary>
-		/// 단일 섹션 라인을 스폰합니다.
-		/// </summary>
-		/// <param name="section">스폰할 섹션</param>
 		private void SpawnSectionLine(VocalSection section)
 		{
-			if (m_GameCanvas == null || m_CenterTarget == null)
-			{
-				Debug.LogError("❌ Required components not set up! Skipping section line spawn.");
-				return;
-			}
+			if (m_GameCanvas == null || m_CenterTarget == null) return;
 
-			if (m_SectionLinePrefab == null)
-			{
-				Debug.Log("🔧 Creating default section line prefab...");
-				CreateDefaultSectionLinePrefab();
-			}
-
-			GameObject sectionLineObj = Instantiate(m_SectionLinePrefab, m_GameCanvas.transform);
+			var sectionLineObj = Instantiate(m_SectionLinePrefab, m_GameCanvas.transform);
 			sectionLineObj.transform.SetSiblingIndex(0);
 
-			var controller = sectionLineObj.GetComponent<SectionLineController>() ?? sectionLineObj.AddComponent<SectionLineController>();
+			var controller = sectionLineObj.GetComponent<SectionLineController>() ??
+							sectionLineObj.AddComponent<SectionLineController>();
+
 			controller.Initialize(section, this, m_GameCanvas, m_CenterTarget);
-
 			m_ActiveSectionLines.Add(sectionLineObj);
-
-			Debug.Log($"🎨 Spawned section line: {section.Type} ({section.StartTime}s - {section.EndTime}s)");
 		}
 
-		/// <summary>
-		/// 섹션 라인들을 업데이트합니다.
-		/// </summary>
 		private void UpdateSectionLines()
 		{
 			for (int i = m_ActiveSectionLines.Count - 1; i >= 0; i--)
 			{
-				var sectionLineObj = m_ActiveSectionLines[i];
-				if (sectionLineObj == null)
+				var lineObj = m_ActiveSectionLines[i];
+				if (lineObj == null)
 				{
 					m_ActiveSectionLines.RemoveAt(i);
 					continue;
 				}
 
-				var controller = sectionLineObj.GetComponent<SectionLineController>();
-				if (controller?.IsExpired() == true)
+				var controller = lineObj.GetComponent<SectionLineController>();
+				if (controller != null && controller.IsExpired())
 				{
 					m_ActiveSectionLines.RemoveAt(i);
-					Destroy(sectionLineObj);
+					Destroy(lineObj);
 				}
 			}
 		}
