@@ -1,4 +1,4 @@
-namespace TabStar.Structs
+namespace TapStar.Structs
 {
 	/// <summary>
 	/// 리듬 게임 노트 데이터 구조체

@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TabStar.Controller
+namespace TapStar.Controller
 {
 	/// <summary>
 	/// 모바일 리듬 게임 UI 관리 클래스

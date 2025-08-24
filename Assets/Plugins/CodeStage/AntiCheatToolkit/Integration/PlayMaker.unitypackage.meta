@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: f84c746903b1ad946823e434229422ea
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202695
+  packageName: Anti-Cheat Toolkit
+  packageVersion: 6.3.0
+  assetPath: Assets/Plugins/CodeStage/AntiCheatToolkit/Integration/PlayMaker.unitypackage
+  uploadId: 779893

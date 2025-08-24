@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TabStar.Structs
+namespace TapStar.Structs
 {
 	/// <summary>
 	/// 노트 데이터와 보컬 섹션을 포함한 전체 데이터 구조체

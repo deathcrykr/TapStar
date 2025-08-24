@@ -1,5 +1,5 @@
 
-namespace TabStar.Structs
+namespace TapStar.Structs
 {
 	/// <summary>
 	/// 보컬 섹션 데이터 구조체

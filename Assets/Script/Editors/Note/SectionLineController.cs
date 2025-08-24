@@ -1,10 +1,10 @@
 #if UNITY_EDITOR
 using DG.Tweening;
-using TabStar.Structs;
+using TapStar.Structs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TabStar.Editors
+namespace TapStar.Editors
 {
 	/// <summary>
 	/// 보컬 섹션을 시각적으로 표현하는 가로선 컨트롤러

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TabStar.Structs
+namespace TapStar.Structs
 {
 	/// <summary>
 	/// 노트 데이터 컨테이너

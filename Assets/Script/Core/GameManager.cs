@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using FMODUnity;
-using TabStar.Controller;
-using TabStar.Structs;
+using TapStar.Controller;
+using TapStar.Structs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 #if UNITY_EDITOR
-using TabStar.Editors;
+using TapStar.Editors;
 #endif
 
-namespace TabStar
+namespace TapStar
 {
 	/// <summary>
 	/// 리듬 게임의 핵심 로직을 관리하는 매니저 클래스
@@ -126,7 +126,6 @@ namespace TabStar
 		private float m_LastHitSoundTime = 0f;
 
 		// Cached references (성능 최적화)
-		private MobileUIController m_CachedUIController;
 		private RectTransform m_CenterRectTransform;
 		private float m_CanvasWidth;
 
@@ -239,8 +238,6 @@ namespace TabStar
 			}
 
 			ClearAllGameObjects();
-
-			m_CachedUIController?.ShowGameOver(m_Score);
 		}
 
 		/// <summary>
@@ -294,9 +291,6 @@ namespace TabStar
 
 		private void InitializeComponents()
 		{
-			// UI Controller 캐싱
-			m_CachedUIController = FindFirstObjectByType<MobileUIController>();
-
 			// Canvas 설정 및 캐싱
 			if (m_GameCanvas == null)
 			{
@@ -613,8 +607,6 @@ namespace TabStar
 
 		private void UpdateScoreDisplay()
 		{
-			m_CachedUIController?.UpdateScore(m_Score);
-
 			if (m_ScoreText != null)
 			{
 				m_ScoreText.text = $"Score: {m_Score}";

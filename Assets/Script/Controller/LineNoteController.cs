@@ -1,9 +1,9 @@
 using DG.Tweening;
-using TabStar.Structs;
+using TapStar.Structs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TabStar.Controller
+namespace TapStar.Controller
 {
 	/// <summary>
 	/// 라인 노트의 움직임과 시각적 효과를 제어하는 컨트롤러

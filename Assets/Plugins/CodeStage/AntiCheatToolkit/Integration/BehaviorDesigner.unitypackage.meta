@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a0519361c30a63a4f94b0b6dc2fc8dad
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202695
+  packageName: Anti-Cheat Toolkit
+  packageVersion: 6.3.0
+  assetPath: Assets/Plugins/CodeStage/AntiCheatToolkit/Integration/BehaviorDesigner.unitypackage
+  uploadId: 779893
