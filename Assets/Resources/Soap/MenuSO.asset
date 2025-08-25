@@ -44,6 +44,28 @@ MonoBehaviour:
   _defaultValue: 0
   _resetOn: 0
   _runtimeValue: 0
+--- !u!114 &-3766113028949379198
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a11231538da9894d8dce88b47df6a36, type: 3}
+  m_Name: _introPage
+  m_EditorClassIdentifier: Obvious.Soap::Obvious.Soap.BoolVariable
+  TagIndex: 0
+  Description: 
+  _guid: f389d9a60082d48bdb465ae9d71adba8-3766
+  _saveGuid: 0
+  _value: 1
+  _debugLogEnabled: 0
+  _saved: 0
+  _defaultValue: 0
+  _resetOn: 1
+  _runtimeValue: 1
 --- !u!114 &-1507978426865780243
 MonoBehaviour:
   m_ObjectHideFlags: 32
@@ -81,3 +103,27 @@ MonoBehaviour:
   _top: {fileID: -1507978426865780243}
   _sidebar: {fileID: -8545353369620164653}
   _footer: {fileID: -5511883972449916019}
+  _introPage: {fileID: -3766113028949379198}
+  _gamePage: {fileID: 5244928435571320408}
+--- !u!114 &5244928435571320408
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a11231538da9894d8dce88b47df6a36, type: 3}
+  m_Name: _gamePage
+  m_EditorClassIdentifier: Obvious.Soap::Obvious.Soap.BoolVariable
+  TagIndex: 0
+  Description: 
+  _guid: f389d9a60082d48bdb465ae9d71adba852449
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 0
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0

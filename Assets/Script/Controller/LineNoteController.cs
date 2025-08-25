@@ -144,10 +144,7 @@ namespace TapStar.Controller
 
 			// 시작 위치 설정 (m_CenterTarget의 Y 위치와 동일하게)
 			float centerY = m_CenterTarget.GetComponent<RectTransform>().anchoredPosition.y;
-			Debug.Log($"🎯 CenterTarget Y position: {centerY}");
-			Debug.Log($"⚓ CenterTarget anchors: min({centerRect.anchorMin.x}, {centerRect.anchorMin.y}) max({centerRect.anchorMax.x}, {centerRect.anchorMax.y}) pivot({centerRect.pivot.x}, {centerRect.pivot.y})");
 			m_RectTransform.anchoredPosition = new Vector2(m_StartX, centerY);
-			Debug.Log($"📍 Note spawned at position: ({m_StartX}, {centerY})");
 
 			// 애니메이션 시간 계산 (정확한 타이밍 보장)
 			float timeToTarget = m_NoteData.TimeSeconds - m_GameManager.currentTime;
@@ -267,6 +264,60 @@ namespace TapStar.Controller
 		public bool IsExpired()
 		{
 			return GetTimeDifference(m_GameManager.currentTime) < -1f;
+		}
+
+		/// <summary>
+		/// 히트 시 애니메이션 효과를 실행합니다.
+		/// </summary>
+		/// <param name="bonusType">보너스 타입 (PERFECT, NICE, GOOD, BAD, BASIC)</param>
+		public void PlayHitAnimation(string bonusType)
+		{
+			// 타이밍에 따른 펀치 스케일 강도 조절
+			float punchScale = bonusType switch
+			{
+				"PERFECT" => 0.8f,
+				"NICE" => 0.6f,
+				"GOOD" => 0.4f,
+				"BAD" => 0.3f,
+				_ => 0.2f
+			};
+
+			// 타이밍에 따른 색상 변화
+			Color hitColor = bonusType switch
+			{
+				"PERFECT" => Color.magenta,
+				"NICE" => Color.cyan,
+				"GOOD" => Color.yellow,
+				"BAD" => Color.orange,
+				_ => Color.white
+			};
+
+			// 기존 애니메이션 중단
+			transform.DOKill();
+			if (m_LineImage != null)
+			{
+				m_LineImage.DOKill();
+			}
+
+			// 먼저 펀치 스케일 효과로 임팩트 연출
+			transform.DOPunchScale(Vector3.one * punchScale, 0.15f, 3, 0.8f)
+				.OnComplete(() =>
+				{
+					// 펀치 효과 후 축소 및 페이드 아웃
+					transform.DOScale(0f, 0.15f).SetEase(Ease.InBack);
+				});
+
+			if (m_LineImage != null)
+			{
+				// 타이밍에 따른 색상 변화 효과
+				m_LineImage.DOColor(hitColor, 0.1f)
+					.OnComplete(() =>
+					{
+						m_LineImage.DOFade(0f, 0.2f);
+					});
+			}
+
+			Debug.Log($"🎯 Hit animation played: {bonusType} (punch scale: {punchScale}, color: {hitColor})");
 		}
 
 		/// <summary>

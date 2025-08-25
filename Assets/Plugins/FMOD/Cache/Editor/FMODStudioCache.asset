@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Scripts/FMOD/TapStar/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638914801361956541
+  lastModified: 638917029831184235
   FileSizes:
   - Name: Desktop
     Value: 826
@@ -34,10 +34,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
   Path: event:/GetYoHandsUp
   Guid:
-    Data1: -382399345
-    Data2: 1266619743
-    Data3: -1486034505
-    Data4: -176733935
+    Data1: -502637987
+    Data2: 1079655390
+    Data3: 670389134
+    Data4: -1249449217
   Banks:
   - {fileID: 5911785242560693021}
   IsStream: 1
@@ -57,14 +57,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/DiscoTrain
+  m_Name: event:/DIscoTrain
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/DiscoTrain
+  Path: event:/DIscoTrain
   Guid:
-    Data1: 1778674251
-    Data2: 1245249815
-    Data3: 1316740279
-    Data4: 1055550221
+    Data1: 915851105
+    Data2: 1179306250
+    Data3: -1398813761
+    Data4: -1052582241
   Banks:
   - {fileID: 5911785242560693021}
   IsStream: 1
@@ -98,9 +98,9 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -6342154361179491013}
   cacheVersion: 131848
-  cacheTime: 638914801361956541
+  cacheTime: 638917029831184235
   SerializableEventsDict:
-  - key: event:/DiscoTrain
+  - key: event:/DIscoTrain
     index: 0
   - key: event:/GetYoHandsUp
     index: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
   Path: Scripts/FMOD/TapStar/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638914801361915038
+  lastModified: 638917029831175562
   FileSizes:
   - Name: Desktop
     Value: 3434016

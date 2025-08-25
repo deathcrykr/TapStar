@@ -1,0 +1,330 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8630664398875858747
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3493a7c214d4cc588db54db4b5a86e, type: 3}
+  m_Name: _cryptoCoin
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptStringVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d1-8630
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 
+  _obscuredValue:
+    hash: 2117564857
+    cryptoKey: 390017007c006e0091007d007100
+    hiddenChars: 
+    currentCryptoKey: 
+    hiddenValue: 
+    version: 1
+--- !u!114 &-8140850696105815698
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cdb8ad39a5bdd4f8ed3d18fae14a63, type: 3}
+  m_Name: _sessionClicks
+  m_EditorClassIdentifier: Obvious.Soap::Obvious.Soap.IntVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d1-8140
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 0
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _isClamped: 0
+  _min:
+    UseLocal: 1
+    LocalValue: 0
+    Variable: {fileID: 0}
+  _max:
+    UseLocal: 1
+    LocalValue: 2147483647
+    Variable: {fileID: 0}
+--- !u!114 &-6115680523636593613
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd31f7c4c9d8e487d8b707daf885dfe0, type: 3}
+  m_Name: _experience
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptFloatVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d1-6115
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _obscuredValue:
+    hash: 723851361
+    hiddenValue: 1809763715
+    currentCryptoKey: 1808653955
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    version: 1
+    migratedVersion: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f49cee8c8a94319a5c43f7e902aafc, type: 3}
+  m_Name: PlayerSO
+  m_EditorClassIdentifier: Assembly-CSharp::TapStar.Soap.PlayerSO
+  _fanCount: {fileID: 1847200587001415640}
+  _experience: {fileID: -6115680523636593613}
+  _experienceToNext: {fileID: 4609970893534934666}
+  _totalClicks: {fileID: 450141992496041692}
+  _sessionClicks: {fileID: -8140850696105815698}
+  _money: {fileID: 8578867269908217399}
+  _gems: {fileID: 2723011820094265885}
+  _cryptoCoin: {fileID: -8630664398875858747}
+  _miningRate: {fileID: 46270660050972325}
+  _miningPower: {fileID: 9142827189116431258}
+--- !u!114 &46270660050972325
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd31f7c4c9d8e487d8b707daf885dfe0, type: 3}
+  m_Name: _miningRate
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptFloatVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d146270
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _obscuredValue:
+    hash: 723851361
+    hiddenValue: 1681016066
+    currentCryptoKey: 1682256386
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    version: 1
+    migratedVersion: 
+--- !u!114 &450141992496041692
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3493a7c214d4cc588db54db4b5a86e, type: 3}
+  m_Name: _totalClicks
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptStringVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d145014
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 
+  _obscuredValue:
+    hash: 2117564857
+    cryptoKey: 4a0031006300b800610047009b00
+    hiddenChars: 
+    currentCryptoKey: 
+    hiddenValue: 
+    version: 1
+--- !u!114 &1847200587001415640
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3493a7c214d4cc588db54db4b5a86e, type: 3}
+  m_Name: _fanCount
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptStringVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d118472
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 
+  _obscuredValue:
+    hash: 2117564857
+    cryptoKey: ed003500de000500a70025009500
+    hiddenChars: 
+    currentCryptoKey: 
+    hiddenValue: 
+    version: 1
+--- !u!114 &2723011820094265885
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f226208f6d55492e90aae53e609b5cb, type: 3}
+  m_Name: _gems
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptIntVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d127230
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _obscuredValue:
+    hash: 723851361
+    hiddenValue: -1035970616
+    currentCryptoKey: 1629498340
+    version: 1
+--- !u!114 &4609970893534934666
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd31f7c4c9d8e487d8b707daf885dfe0, type: 3}
+  m_Name: _experienceToNext
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptFloatVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d146099
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _obscuredValue:
+    hash: 723851361
+    hiddenValue: 1154626001
+    currentCryptoKey: 1144115921
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    version: 1
+    migratedVersion: 
+--- !u!114 &8578867269908217399
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3493a7c214d4cc588db54db4b5a86e, type: 3}
+  m_Name: _money
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptStringVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d185788
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 
+  _obscuredValue:
+    hash: 2117564857
+    cryptoKey: ad009200f400df002100b2007a00
+    hiddenChars: 
+    currentCryptoKey: 
+    hiddenValue: 
+    version: 1
+--- !u!114 &9142827189116431258
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd31f7c4c9d8e487d8b707daf885dfe0, type: 3}
+  m_Name: _miningPower
+  m_EditorClassIdentifier: Assembly-CSharp::Obvious.Soap.EncryptFloatVariable
+  TagIndex: 0
+  Description: 
+  _guid: 60dbdf204eeb8411aa471062f57e72d191428
+  _saveGuid: 0
+  _value: 0
+  _debugLogEnabled: 0
+  _saved: 1
+  _defaultValue: 0
+  _resetOn: 0
+  _runtimeValue: 0
+  _obscuredValue:
+    hash: 723851361
+    hiddenValue: 997250356
+    currentCryptoKey: 1003843636
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    version: 1
+    migratedVersion: 
